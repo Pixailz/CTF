@@ -1,0 +1,1 @@
+wfuzz -c -z file,wordlist --filter "w!=0" 10.10.117.158/api/site-log.php?date=FUZZ

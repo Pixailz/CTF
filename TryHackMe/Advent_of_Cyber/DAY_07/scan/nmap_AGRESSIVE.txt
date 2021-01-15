@@ -1,0 +1,46 @@
+# Nmap 7.91 scan initiated Wed Nov 18 05:24:40 2020 as: nmap -A -T4 -Pn -oN nmap_AGRESSIVE.txt 10.10.109.13
+Nmap scan report for 10.10.109.13
+Host is up (0.038s latency).
+Not shown: 997 closed ports
+PORT    STATE SERVICE VERSION
+22/tcp  open  ssh     OpenSSH 7.4 (protocol 2.0)
+| ssh-hostkey: 
+|   2048 5b:52:4f:f5:33:32:d3:26:d8:bb:e8:fb:39:42:ff:1e (RSA)
+|   256 8e:8b:f5:18:11:52:4f:32:10:e7:1a:d7:5f:ea:62:13 (ECDSA)
+|_  256 26:28:bc:ab:6a:5b:be:85:ee:24:59:ea:99:b1:0c:01 (ED25519)
+111/tcp open  rpcbind 2-4 (RPC #100000)
+| rpcinfo: 
+|   program version    port/proto  service
+|   100000  2,3,4        111/tcp   rpcbind
+|   100000  2,3,4        111/udp   rpcbind
+|   100000  3,4          111/tcp6  rpcbind
+|   100000  3,4          111/udp6  rpcbind
+|   100024  1          36950/udp   status
+|   100024  1          44983/tcp6  status
+|   100024  1          45899/udp6  status
+|_  100024  1          54611/tcp   status
+999/tcp open  http    SimpleHTTPServer 0.6 (Python 3.6.8)
+|_http-server-header: SimpleHTTP/0.6 Python/3.6.8
+|_http-title: Directory listing for /
+No exact OS matches for host (If you know what OS is running on it, see https://nmap.org/submit/ ).
+TCP/IP fingerprint:
+OS:SCAN(V=7.91%E=4%D=11/18%OT=22%CT=1%CU=36627%PV=Y%DS=2%DC=T%G=Y%TM=5FB4A2
+OS:77%P=x86_64-pc-linux-gnu)SEQ(SP=108%GCD=1%ISR=109%TI=Z%CI=Z%II=I%TS=A)OP
+OS:S(O1=M505ST11NW6%O2=M505ST11NW6%O3=M505NNT11NW6%O4=M505ST11NW6%O5=M505ST
+OS:11NW6%O6=M505ST11)WIN(W1=68DF%W2=68DF%W3=68DF%W4=68DF%W5=68DF%W6=68DF)EC
+OS:N(R=Y%DF=Y%T=FF%W=6903%O=M505NNSNW6%CC=Y%Q=)T1(R=Y%DF=Y%T=FF%S=O%A=S+%F=
+OS:AS%RD=0%Q=)T2(R=N)T3(R=N)T4(R=Y%DF=Y%T=FF%W=0%S=A%A=Z%F=R%O=%RD=0%Q=)T5(
+OS:R=Y%DF=Y%T=FF%W=0%S=Z%A=S+%F=AR%O=%RD=0%Q=)T6(R=Y%DF=Y%T=FF%W=0%S=A%A=Z%
+OS:F=R%O=%RD=0%Q=)T7(R=Y%DF=Y%T=FF%W=0%S=Z%A=S+%F=AR%O=%RD=0%Q=)U1(R=Y%DF=N
+OS:%T=FF%IPL=164%UN=0%RIPL=G%RID=G%RIPCK=G%RUCK=G%RUD=G)IE(R=Y%DFI=N%T=FF%C
+OS:D=S)
+
+Network Distance: 2 hops
+
+TRACEROUTE (using port 79/tcp)
+HOP RTT      ADDRESS
+1   56.18 ms 10.8.0.1
+2   56.26 ms 10.10.109.13
+
+OS and Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+# Nmap done at Wed Nov 18 05:26:31 2020 -- 1 IP address (1 host up) scanned in 111.80 seconds

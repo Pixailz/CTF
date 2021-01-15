@@ -1,0 +1,26 @@
+# Nmap 7.91 scan initiated Tue Nov 17 04:43:33 2020 as: nmap -p- -A -T4 -oN nmap.txt -oX nmap.xml 10.10.94.113
+Nmap scan report for 10.10.94.113
+Host is up (0.048s latency).
+Not shown: 65532 filtered ports
+PORT    STATE  SERVICE  VERSION
+22/tcp  closed ssh
+80/tcp  open   http     Apache httpd
+|_http-server-header: Apache
+|_http-title: Site doesn't have a title (text/html).
+443/tcp open   ssl/http Apache httpd
+|_http-server-header: Apache
+|_http-title: Site doesn't have a title (text/html).
+| ssl-cert: Subject: commonName=www.example.com
+| Not valid before: 2015-09-16T10:45:03
+|_Not valid after:  2025-09-13T10:45:03
+Aggressive OS guesses: Linux 3.10 - 3.13 (90%), Linux 3.10 - 4.11 (90%), Linux 3.13 (90%), Linux 3.13 or 4.2 (90%), Linux 3.2 - 3.5 (90%), Linux 3.2 - 3.8 (90%), Linux 5.4 (90%), Crestron XPanel control system (89%), Linux 3.12 (89%), Linux 3.16 (89%)
+No exact OS matches for host (test conditions non-ideal).
+Network Distance: 2 hops
+
+TRACEROUTE (using port 22/tcp)
+HOP RTT      ADDRESS
+1   54.37 ms 10.8.0.1
+2   54.50 ms 10.10.94.113
+
+OS and Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+# Nmap done at Tue Nov 17 04:45:56 2020 -- 1 IP address (1 host up) scanned in 143.07 seconds

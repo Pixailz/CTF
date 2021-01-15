@@ -1,0 +1,28 @@
+curl -u elastic:password https://CLUSTER_ID.REGION.PLATFORM.found.io:9243/my_index/my_type/_search?pretty=true
+{
+  "took" : 0,
+  "timed_out" : false,
+  "_shards" : {
+    "total" : 5,
+    "successful" : 5,
+    "failed" : 0
+  },
+  "hits" : {
+    "total" : 1,
+    "max_score" : 1.0,
+    "hits" : [
+      {
+        "_index" : "my_index",
+        "_type" : "my_type",
+        "_id" : "AV3ZeXsOMOVbmlCACuwj",
+        "_score" : 1.0,
+        "_source" : {
+          "title" : "One",
+          "tags" : [
+            "ruby"
+          ]
+        }
+      }
+    ]
+  }
+}

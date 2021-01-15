@@ -1,0 +1,1652 @@
+#Writup By Pixailz
+
+========================================================================================================================
+INTRO
+========================================================================================================================
+The Bandit wargame is aimed at absolute beginners. It will teach the basics needed to be 
+able to play other wargames. If you notice something essential is missing or have
+ideas for new levels, please let us know!
+Note for beginners
+
+This game, like most other games, is organised in levels. You start at Level 0 and try to 
+“beat” or “finish” it. Finishing a level results in information on how to start the next level. The 
+pages on this website for “Level <X>” contain information on how to start level X from the 
+previous level. E.g. The page for Level 1 has information on how to gain access from Level 0 
+to Level 1. All levels in this game have a page on this website, and they are all linked to from 
+the sidemenu on the left of this page.
+
+You will encounter many situations in which you have no idea what you are supposed to 
+do. Don’t panic! Don’t give up! The purpose of this game is for you to learn the basics. 
+Part of learning the basics, is reading a lot of new information.
+
+There are several things you can try when you are unsure how to continue:
+
+    First, if you know a command, but don’t know how to use it, try the manual (man 
+    page) by entering “man <command>” (without the quotes). e.g. if you know about 
+    the “ls” command, type: man ls. The “man” command also has a manual, try it. Press 
+    q to quit the man command.
+    Second, if there is no man page, the command might be a shell built-in. In that case 
+    use the “help <X>” command. E.g. help cd
+    Also, your favorite search-engine is your friend. Learn how to use it! I recommend 
+    Google.
+    Lastly, if you are still stuck, you can join us on IRC
+
+You’re ready to start! Begin with Level 0, linked at the left of this page. Good luck!
+
+Note for VMs: You may fail to connect to overthewire.org via SSH with a “broken pipe 
+error” when the network adapter for the VM is configured to use NAT mode. Adding the 
+setting IPQoS throughput to /etc/ssh/ssh_config should resolve the issue. If 
+this does not solve your issue, the only option then is to change the adapter to Bridged 
+mode.
+========================================================================================================================
+
+
+
+========================================================================================================================
+bandit0
+========================================================================================================================
+GOAL
+------------------------------------------------------------------------------------------------------------------------
+The goal of this level is for you to log into the game using SSH. The host to which you 
+need to connect is bandit.labs.overthewire.org, on port 2220. The username is bandit0 and 
+the password is bandit0. Once logged in, go to the Level 1 page to find out how to beat Level 1.
+
+The password for the next level is stored in a file called readme located in the home 
+directory. Use this password to log into bandit1 using SSH. Whenever you find a password 
+for a level, use SSH (on port 2220) to log into that level and continue the game.
+========================================================================================================================
+pix@parrot:~$ ssh bandit0@bandit.labs.overthewire.org -p 2220
+
+========================================================================================================================
+Flag_Bandit_00=[boJ9jbbUNNfktd78OOpsqOltutMc3MY1]
+========================================================================================================================
+
+========================================================================================================================
+bandit1
+========================================================================================================================
+GOAL
+------------------------------------------------------------------------------------------------------------------------
+The password for the next level is stored in a file called - located in the home directory
+========================================================================================================================
+#cat a file name "-" (rf. https://unix.stackexchange.com/questions/16357/usage-of-dash-in-place-of-a-filename)
+pix@parrot:~$ ssh bandit1@bandit.labs.overthewire.org -p 2220
+bandit1@bandit:~$ cat ./-
+CV1DtqXWVFXTvM2F0k09SHz0YwRINYA9
+
+========================================================================================================================
+Flag_Bandit_01=[CV1DtqXWVFXTvM2F0k09SHz0YwRINYA9]
+========================================================================================================================
+
+========================================================================================================================
+bandit2
+========================================================================================================================
+GOAL
+------------------------------------------------------------------------------------------------------------------------
+The password for the next level is stored in a file called spaces in this filename located in 
+the home directory
+========================================================================================================================
+#cat files with spaces "\ "
+pix@parrot:~$ ssh bandit2@bandit.labs.overthewire.org -p 2220
+bandit2@bandit:~$ cat spaces\ in\ this\ filename
+UmHadQclWmgdLOKQ3YNgjWxGoRMb5luK
+
+========================================================================================================================
+Flag_Bandit_02=[UmHadQclWmgdLOKQ3YNgjWxGoRMb5luK]
+========================================================================================================================
+
+========================================================================================================================
+bandit3
+========================================================================================================================
+GOAL
+------------------------------------------------------------------------------------------------------------------------
+The password for the next level is stored in a hidden file in the inhere directory.
+========================================================================================================================
+#cat hidden file
+pix@parrot:~$ ssh bandit3@bandit.labs.overthewire.org -p 2220
+bandit3@bandit:~$ cat inhere/.hidden
+pIwrPrtPN36QITSp3EQaw936yaFoFgAB
+
+========================================================================================================================
+Flag_Bandit_03=[pIwrPrtPN36QITSp3EQaw936yaFoFgAB]
+========================================================================================================================
+
+========================================================================================================================
+bandit4
+========================================================================================================================
+GOAL
+------------------------------------------------------------------------------------------------------------------------
+The password for the next level is stored in the only human-readable file in the inhere 
+directory. Tip: if your terminal is messed up, try the “reset” command.
+========================================================================================================================
+pix@parrot:~$ ssh bandit4@bandit.labs.overthewire.org -p 2220
+#Solution with find command
+bandit4@bandit:~$ cd inhere/
+bandit4@bandit:~/inhere$ find . -type f | xargs file 
+./-file09: data
+./-file06: data
+./-file01: data
+./-file02: data
+./-file05: data
+./-file03: data
+./-file08: data
+./-file07: ASCII text
+./-file04: data
+./-file00: data
+bandit4@bandit:~/inhere$ cat ./-file07 
+koReBOKuIDDepwhWk7jZC0RTdopnAYKh
+#Solution with grep command
+bandit4@bandit:~$ cd inhere/
+bandit4@bandit:~/inhere$ grep "[[:print:]]" ./-*
+Binary file ./-file00 matches
+Binary file ./-file01 matches
+Binary file ./-file02 matches
+Binary file ./-file03 matches
+Binary file ./-file04 matches
+Binary file ./-file05 matches
+Binary file ./-file06 matches
+./-file07:koReBOKuIDDepwhWk7jZC0RTdopnAYKh
+Binary file ./-file08 matches
+Binary file ./-file09 matches
+
+========================================================================================================================
+Flag_Bandit_04=[koReBOKuIDDepwhWk7jZC0RTdopnAYKh]
+========================================================================================================================
+
+========================================================================================================================
+bandit5
+========================================================================================================================
+GOAL
+------------------------------------------------------------------------------------------------------------------------
+The password for the next level is stored in a file somewhere under the inhere directory and 
+has all of the following properties:
+    human-readable
+    1033 bytes in size
+    not executable
+========================================================================================================================
+pix@parrot:~$ ssh bandit5@bandit.labs.overthewire.org -p 2220
+bandit5@bandit:~$ find . -type f -size 1033c ! -executable
+./inhere/maybehere07/.file2
+bandit5@bandit:~$ cat inhere/maybehere07/.file2
+DXjZPULLxYr17uwoI01bNLQbtFemEgo7
+
+========================================================================================================================
+Flag_Bandit_05=[DXjZPULLxYr17uwoI01bNLQbtFemEgo7]
+========================================================================================================================
+
+========================================================================================================================
+bandit6
+========================================================================================================================
+GOAL
+------------------------------------------------------------------------------------------------------------------------
+The password for the next level is stored somewhere on the server and has all of the 
+following properties:
+    owned by user bandit7
+    owned by group bandit6
+    33 bytes in size
+========================================================================================================================
+pix@parrot:~$ ssh bandit6@bandit.labs.overthewire.org -p 2220
+bandit6@bandit:~$ find / -type f -user bandit7 -group bandit6 -size 33c
+find: ‘/run/lvm’: Permission denied
+find: ‘/run/screen/S-bandit23’: Permission denied
+find: ‘/run/screen/S-bandit0’: Permission denied
+find: ‘/run/screen/S-bandit24’: Permission denied
+find: ‘/run/screen/S-bandit5’: Permission denied
+find: ‘/run/screen/S-bandit9’: Permission denied
+find: ‘/run/screen/S-bandit25’: Permission denied
+find: ‘/run/screen/S-bandit2’: Permission denied
+find: ‘/run/screen/S-bandit11’: Permission denied
+find: ‘/run/screen/S-bandit30’: Permission denied
+find: ‘/run/screen/S-bandit29’: Permission denied
+find: ‘/run/screen/S-bandit7’: Permission denied
+find: ‘/run/screen/S-bandit14’: Permission denied
+find: ‘/run/screen/S-bandit16’: Permission denied
+find: ‘/run/screen/S-bandit26’: Permission denied
+find: ‘/run/screen/S-bandit15’: Permission denied
+find: ‘/run/screen/S-bandit13’: Permission denied
+find: ‘/run/screen/S-bandit33’: Permission denied
+find: ‘/run/screen/S-bandit28’: Permission denied
+find: ‘/run/screen/S-bandit10’: Permission denied
+find: ‘/run/screen/S-bandit8’: Permission denied
+find: ‘/run/screen/S-bandit27’: Permission denied
+find: ‘/run/screen/S-bandit18’: Permission denied
+find: ‘/run/screen/S-bandit31’: Permission denied
+find: ‘/run/screen/S-bandit19’: Permission denied
+find: ‘/run/screen/S-bandit21’: Permission denied
+find: ‘/run/screen/S-bandit20’: Permission denied
+find: ‘/run/shm’: Permission denied
+find: ‘/run/lock/lvm’: Permission denied
+find: ‘/var/spool/rsyslog’: Permission denied
+find: ‘/var/spool/cron/crontabs’: Permission denied
+find: ‘/var/log’: Permission denied
+find: ‘/var/tmp’: Permission denied
+find: ‘/var/cache/ldconfig’: Permission denied
+find: ‘/var/cache/apt/archives/partial’: Permission denied
+/var/lib/dpkg/info/bandit7.password
+find: ‘/var/lib/apt/lists/partial’: Permission denied
+find: ‘/var/lib/polkit-1’: Permission denied
+find: ‘/cgroup2/csessions’: Permission denied
+find: ‘/home/bandit28-git’: Permission denied
+find: ‘/home/bandit30-git’: Permission denied
+find: ‘/home/bandit31-git’: Permission denied
+find: ‘/home/bandit5/inhere’: Permission denied
+find: ‘/home/bandit27-git’: Permission denied
+find: ‘/home/bandit29-git’: Permission denied
+find: ‘/tmp’: Permission denied
+find: ‘/lost+found’: Permission denied
+find: ‘/root’: Permission denied
+find: ‘/etc/ssl/private’: Permission denied
+find: ‘/etc/lvm/backup’: Permission denied
+find: ‘/etc/lvm/archive’: Permission denied
+find: ‘/etc/polkit-1/localauthority’: Permission denied
+find: ‘/sys/fs/pstore’: Permission denied
+find: ‘/proc/tty/driver’: Permission denied
+find: ‘/proc/11942/task/11942/fdinfo/6’: No such file or directory
+find: ‘/proc/11942/fdinfo/5’: No such file or directory
+find: ‘/boot/lost+found’: Permission denied
+bandit6@bandit:~$ cat /var/lib/dpkg/info/bandit7.password
+HKBPTKQnIay4Fw76bEy8PVxKEDQRKTzs
+
+========================================================================================================================
+Flag_Bandit_06=[HKBPTKQnIay4Fw76bEy8PVxKEDQRKTzs]
+========================================================================================================================
+GOAL
+------------------------------------------------------------------------------------------------------------------------
+The password for the next level is stored in a file called - located in the home directory
+========================================================================================================================
+
+========================================================================================================================
+bandit7
+========================================================================================================================
+GOAL
+------------------------------------------------------------------------------------------------------------------------
+The password for the next level is stored in the file data.txt next to the word millionth
+========================================================================================================================
+pix@parrot:~$ ssh bandit7@bandit.labs.overthewire.org -p 2220
+bandit7@bandit:~$ cat data.txt | grep millionth
+millionth	cvX2JJa4CFALtqS87jk27qwqGhBM9plV
+
+========================================================================================================================
+Flag_Bandit_07=[cvX2JJa4CFALtqS87jk27qwqGhBM9plV]
+========================================================================================================================
+
+========================================================================================================================
+bandit8
+========================================================================================================================
+GOAL
+------------------------------------------------------------------------------------------------------------------------
+The password for the next level is stored in the file data.txt and is the only line of text that 
+occurs only once
+========================================================================================================================
+pix@parrot:~$ ssh bandit8@bandit.labs.overthewire.org -p 2220
+#sort sort the file alphabeticly and uniq -u find unique line
+bandit8@bandit:~$ sort data.txt | uniq -u
+UsvVyFSfZZWbi6wgC7dAFyFuR6jQQUhR
+
+========================================================================================================================
+Flag_Bandit_08=[UsvVyFSfZZWbi6wgC7dAFyFuR6jQQUhR]
+========================================================================================================================
+
+========================================================================================================================
+bandit9
+========================================================================================================================
+GOAL
+------------------------------------------------------------------------------------------------------------------------
+The password for the next level is stored in the file data.txt in one of the few human-
+readable strings, beginning with several ‘=’ characters.
+========================================================================================================================
+pix@parrot:~$ ssh bandit9@bandit.labs.overthewire.org -p 2220
+bandit9@bandit:~$ strings data.txt | grep ==========
+2========== the
+========== password
+========== isa
+========== truKLdjsbJ5g7yyJ2X2R0o3a5HQJFuLk
+
+========================================================================================================================
+Flag_Bandit_09=[truKLdjsbJ5g7yyJ2X2R0o3a5HQJFuLk]
+========================================================================================================================
+
+========================================================================================================================
+bandit10
+========================================================================================================================
+GOAL
+------------------------------------------------------------------------------------------------------------------------
+The password for the next level is stored in the file data.txt, which contains base64 
+encoded data
+========================================================================================================================
+pix@parrot:~$ ssh bandit10@bandit.labs.overthewire.org -p 2220
+#base64 --help
+bandit10@bandit:~$ base64 -d data.txt
+The password is IFukwKGsFW8MOq3IRFqrxE1hxTNEbUPR
+
+========================================================================================================================
+Flag_Bandit_10=[IFukwKGsFW8MOq3IRFqrxE1hxTNEbUPR]
+========================================================================================================================
+
+========================================================================================================================
+bandit11
+========================================================================================================================
+GOAL
+------------------------------------------------------------------------------------------------------------------------
+The password for the next level is stored in the file data.txt, where all lowercase (a-z) and 
+uppercase (A-Z) letters have been rotated by 13 positions
+========================================================================================================================
+pix@parrot:~$ ssh bandit11@bandit.labs.overthewire.org -p 2220
+bandit11@bandit:~$ cat data.txt 
+Gur cnffjbeq vf 5Gr8L4qetPEsPk8htqjhRK8XSP6x2RHh
+#Online caesar cipher decoder shifted 13 output
+The password is 5Te8Y4drgCRfCx8ugdwuEX8KFC6k2EUu
+
+========================================================================================================================
+Flag_Bandit_11=[5Te8Y4drgCRfCx8ugdwuEX8KFC6k2EUu]
+========================================================================================================================
+
+========================================================================================================================
+bandit12
+========================================================================================================================
+GOAL
+------------------------------------------------------------------------------------------------------------------------
+The password for the next level is stored in the file data.txt, which is a hexdump of a file 
+that has been repeatedly compressed. For this level it may be useful to create a directory 
+under /tmp in which you can work using mkdir. For example: mkdir /tmp/myname123. Then 
+copy the datafile using cp, and rename it using mv (read the manpages!)
+========================================================================================================================
+pix@parrot:~$ ssh bandit12@bandit.labs.overthewire.org -p 2220
+bandit12@bandit:~$ mkdir /tmp/Pixailz
+bandit12@bandit:~$ cp data.txt /tmp/Pixailz
+bandit12@bandit:/tmp/Pixailz$ file data.txt 
+data.txt: ASCII text
+bandit12@bandit:/tmp/Pixailz$ xxd -r data.txt > dataReverted
+bandit12@bandit:/tmp/Pixailz$ file dataReverted 
+dataReverted: gzip compressed data, was "data2.bin", last modified: Tue Oct 16 12:00:23 2018, max compression, from Unix
+bandit12@bandit:/tmp/Pixailz$ zcat dataReverted > dataZcat
+bandit12@bandit:/tmp/Pixailz$ file dataZcat 
+dataZcat: bzip2 compressed data, block size = 900
+bandit12@bandit:/tmp/Pixailz$ bzip2 -d dataZcat 
+bzip2: Can't guess original name for dataZcat -- using dataZcat.out
+bandit12@bandit:/tmp/Pixailz$ file dataZcat.out
+dataZcat.out: gzip compressed data, was "data4.bin", last modified: Tue Oct 16 12:00:23 2018, max compression, from Unix
+bandit12@bandit:/tmp/Pixailz$ ls 
+dataReverted  data.txt  dataZcat.out
+bandit12@bandit:/tmp/Pixailz$ zcat dataZcat.out > dataZcat2
+bandit12@bandit:/tmp/Pixailz$ file dataZcat2 
+dataZcat2: POSIX tar archive (GNU)
+bandit12@bandit:/tmp/Pixailz$ tar xvf dataZcat2
+data5.bin
+bandit12@bandit:/tmp/Pixailz$ file data5.bin 
+data5.bin: POSIX tar archive (GNU)
+bandit12@bandit:/tmp/Pixailz$ tar xvf data5.bin
+data6.bin
+bandit12@bandit:/tmp/Pixailz$ file data6.bin 
+data6.bin: bzip2 compressed data, block size = 900k
+andit12@bandit:/tmp/Pixailz$ bzip2 -d data6.bin
+bzip2: Can't guess original name for data6.bin -- using data6.bin.out
+bandit12@bandit:/tmp/Pixailz$ file data6.bin.out 
+data6.bin.out: POSIX tar archive (GNU)
+bandit12@bandit:/tmp/Pixailz$ tar xvf data6.bin.out
+data8.bin
+bandit12@bandit:/tmp/Pixailz$ file data8.bin 
+data8.bin: gzip compressed data, was "data9.bin", last modified: Tue Oct 16 12:00:23 2018, max compression, from Unix
+bandit12@bandit:/tmp/Pixailz$ zcat data8.bin > data8Zcat
+bandit12@bandit:/tmp/Pixailz$ file data8Zcat 
+data8Zcat: ASCII text
+bandit12@bandit:/tmp/Pixailz$ cat data8Zcat 
+The password is 8ZjyCRiBWFYkneahHwxCv3wb2a1ORpYL
+
+========================================================================================================================
+Flag_Bandit_12=[8ZjyCRiBWFYkneahHwxCv3wb2a1ORpYL]
+========================================================================================================================
+
+========================================================================================================================
+bandit13
+========================================================================================================================
+GOAL
+------------------------------------------------------------------------------------------------------------------------
+The password for the next level is stored in /etc/bandit_pass/bandit14 and can only be 
+read by user bandit14. For this level, you don’t get the next password, but you get a 
+private SSH key that can be used to log into the next level. Note: localhost is a hostname 
+that refers to the machine you are working on
+========================================================================================================================
+pix@parrot:~$ ssh bandit13@bandit.labs.overthewire.org -p 2220
+bandit13@bandit:~$ ssh -i sshkey.private bandit14@localhost
+bandit14@bandit:~$ cat /etc/bandit_pass/bandit14
+4wcYUJFw0k0XLShlDzztnTBHiqxU3b3e
+
+========================================================================================================================
+Flag_Bandit_13=[4wcYUJFw0k0XLShlDzztnTBHiqxU3b3e]
+========================================================================================================================
+
+========================================================================================================================
+bandit14
+========================================================================================================================
+GOAL
+------------------------------------------------------------------------------------------------------------------------
+The password for the next level can be retrieved by submitting the password of the current 
+level to port 30000 on localhost.
+========================================================================================================================
+pix@parrot:~$ ssh bandit14@bandit.labs.overthewire.org -p 2220
+bandit14@bandit:~$ nc localhost 30000
+4wcYUJFw0k0XLShlDzztnTBHiqxU3b3e
+Correct!
+BfMYroe26WYalil77FoDi9qh59eK5xNr
+
+========================================================================================================================
+Flag_Bandit_14=[BfMYroe26WYalil77FoDi9qh59eK5xNr]
+========================================================================================================================
+
+========================================================================================================================
+bandit15
+========================================================================================================================
+GOAL
+------------------------------------------------------------------------------------------------------------------------
+The password for the next level can be retrieved by submitting the password of the current 
+level to port 30001 on localhost using SSL encryption.
+
+Helpful note: Getting “HEARTBEATING” and “Read R BLOCK”? Use -ign_eof and 
+read the “CONNECTED COMMANDS” section in the manpage. Next to ‘R’ and ‘Q’, 
+the ‘B’ command also works in this version of that command…
+========================================================================================================================
+pix@parrot:~$ ssh bandit15@bandit.labs.overthewire.org -p 2220
+bandit15@bandit:~$ openssl s_client -connect localhost:30001
+CONNECTED(00000003)
+depth=0 CN = localhost
+verify error:num=18:self signed certificate
+verify return:1
+depth=0 CN = localhost
+verify return:1
+---
+Certificate chain
+ 0 s:/CN=localhost
+   i:/CN=localhost
+---
+Server certificate
+-----BEGIN CERTIFICATE-----
+MIICBjCCAW+gAwIBAgIEagw8xTANBgkqhkiG9w0BAQUFADAUMRIwEAYDVQQDDAls
+b2NhbGhvc3QwHhcNMTkxMjI3MjMzNTQwWhcNMjAxMjI2MjMzNTQwWjAUMRIwEAYD
+VQQDDAlsb2NhbGhvc3QwgZ8wDQYJKoZIhvcNAQEBBQADgY0AMIGJAoGBAO5uAaB2
+W1ZXy2XMwNDPodzw89B9L9/oQJYv5DBzOhOPzPahBAg/aJYlGmu7gM77pO6SqoLw
+qqa2HnleoMAAd2OzaoSbmltSbyD3KNb1nrD9PIG10d8lURzQhWGkr0iixFgKBb6M
+SDyBcdPCgfnc4CJj8l9gKaIx3j5iDaBSQT/FAgMBAAGjZTBjMBQGA1UdEQQNMAuC
+CWxvY2FsaG9zdDBLBglghkgBhvhCAQ0EPhY8QXV0b21hdGljYWxseSBnZW5lcmF0
+ZWQgYnkgTmNhdC4gU2VlIGh0dHBzOi8vbm1hcC5vcmcvbmNhdC8uMA0GCSqGSIb3
+DQEBBQUAA4GBAKCaxl1+/Iw6OsN7BavFSlnptjhuvGaZ7ywWCesVl9aAw6KyEG67
+y05CGDuqBFssCJ+m/RT9wC+Jxiv+0ptsOAfEbn4Id8GbNcTTcuZxlioQxeuLNNWr
+jhY4NISaQYCFVZARnp57BgwtpK20aCW2hj/IzpoDuD2TH5Y4FBwT4raD
+-----END CERTIFICATE-----
+subject=/CN=localhost
+issuer=/CN=localhost
+---
+No client certificate CA names sent
+Peer signing digest: SHA512
+Server Temp Key: X25519, 253 bits
+---
+SSL handshake has read 1019 bytes and written 269 bytes
+Verification error: self signed certificate
+---
+New, TLSv1.2, Cipher is ECDHE-RSA-AES256-GCM-SHA384
+Server public key is 1024 bit
+Secure Renegotiation IS supported
+Compression: NONE
+Expansion: NONE
+No ALPN negotiated
+SSL-Session:
+    Protocol  : TLSv1.2
+    Cipher    : ECDHE-RSA-AES256-GCM-SHA384
+    Session-ID: 6B0AA62CBEACAC2346508D904CBBDE9B5501702DF07F150B356847672D989C93
+    Session-ID-ctx: 
+    Master-Key: 24864B13369E3465E639B0F438BCDECE56A010FABA3718D7768B58CB752469574CE73B30DEEEE7BA58F0FCADC629B704
+    PSK identity: None
+    PSK identity hint: None
+    SRP username: None
+    TLS session ticket lifetime hint: 7200 (seconds)
+    TLS session ticket:
+    0000 - d5 b2 6c af 59 99 a9 53-e9 15 f7 25 ee ad 8d 3e   ..l.Y..S...%...>
+    0010 - 7a 43 74 4a 27 76 da 3f-a9 05 49 cb e3 13 0c 6b   zCtJ'v.?..I....k
+    0020 - c2 aa 5c e9 6f bc 40 7c-ba 47 ff 50 5e 7d 1b 50   ..\.o.@|.G.P^}.P
+    0030 - e6 17 b9 51 41 9c 4a 64-14 34 ad 38 b1 76 69 a7   ...QA.Jd.4.8.vi.
+    0040 - 7a af 65 6a be 10 67 cc-92 e9 3b 0b e3 43 66 43   z.ej..g...;..CfC
+    0050 - 17 00 d1 d8 69 6a 03 3b-42 c6 f2 8e 54 1c df 65   ....ij.;B...T..e
+    0060 - 2d 7f e8 62 c3 3f 02 1b-ab c1 67 9b be 70 49 5d   -..b.?....g..pI]
+    0070 - c9 c2 0e d1 f1 dc 15 5e-30 7c d9 69 86 ac 9a 0e   .......^0|.i....
+    0080 - ac 06 db 8d 36 15 e7 47-4e 7f 8b 39 91 d4 55 2b   ....6..GN..9..U+
+    0090 - 76 71 d7 e5 3d 1d 57 61-a4 68 b4 7e 90 ab be d4   vq..=.Wa.h.~....
+
+    Start Time: 1577941212
+    Timeout   : 7200 (sec)
+    Verify return code: 18 (self signed certificate)
+    Extended master secret: yes
+---
+BfMYroe26WYalil77FoDi9qh59eK5xNr
+Correct!
+cluFn7wTiGryunymYOu4RcffSxQluehd
+
+closed
+
+========================================================================================================================
+Flag_Bandit_15=[cluFn7wTiGryunymYOu4RcffSxQluehd]
+========================================================================================================================
+
+========================================================================================================================
+bandit16
+========================================================================================================================
+GOAL
+------------------------------------------------------------------------------------------------------------------------
+The credentials for the next level can be retrieved by submitting the password of the 
+current level to a port on localhost in the range 31000 to 32000. First find out which of 
+these ports have a server listening on them. Then find out which of those speak SSL and 
+which don’t. There is only 1 server that will give the next credentials, the others will simply 
+send back to you whatever you send to it.
+========================================================================================================================
+pix@parrot:~$ ssh bandit16@bandit.labs.overthewire.org -p 2220
+bandit16@bandit:~$ mkdir /tmp/Pixailz
+bandit16@bandit:~$ cd /tmp/Pixailz
+bandit16@bandit:/tmp/Pixailz$ openssl s_client -connect localhost:31790
+CONNECTED(00000003)
+depth=0 CN = localhost
+verify error:num=18:self signed certificate
+verify return:1
+depth=0 CN = localhost
+verify return:1
+---
+Certificate chain
+ 0 s:/CN=localhost
+   i:/CN=localhost
+---
+Server certificate
+-----BEGIN CERTIFICATE-----
+MIICBjCCAW+gAwIBAgIEbSNYOzANBgkqhkiG9w0BAQUFADAUMRIwEAYDVQQDDAls
+b2NhbGhvc3QwHhcNMTkxMTI2MDMzNzA3WhcNMjAxMTI1MDMzNzA3WjAUMRIwEAYD
+VQQDDAlsb2NhbGhvc3QwgZ8wDQYJKoZIhvcNAQEBBQADgY0AMIGJAoGBAMK/1fWi
+3jCBydYlpk1fH5e96vpfdBFXtNXo8foquNUmvdFleKOUIFova64TG6KP6FVzEsV9
+xvda7w7HWLYV9n6mX+QUTOFCRAGGrfLMyVtbzbn4B/QHaN6VUpF6nSeKys/H9LW8
+jUrW2NaIrMXyOkmcrRHTNt96sGyIwYEOJfJfAgMBAAGjZTBjMBQGA1UdEQQNMAuC
+CWxvY2FsaG9zdDBLBglghkgBhvhCAQ0EPhY8QXV0b21hdGljYWxseSBnZW5lcmF0
+ZWQgYnkgTmNhdC4gU2VlIGh0dHBzOi8vbm1hcC5vcmcvbmNhdC8uMA0GCSqGSIb3
+DQEBBQUAA4GBAFe9QZAhX0RNQIJ92lHIyuh85LlUGfKQPr4psE3tXdrcX9bV0Ici
+PRSaFzX8hlBHcwtNmgJjmv5JmyFi7vyIx6JOKf4Eu+Hnxd0SQ2S8090PIM6cg8eS
+2viDh3dTUeY7vIGqK/p/TXi3n4YVnpd6uzkCyGUmK+37FRjQOYbZvnt/
+-----END CERTIFICATE-----
+subject=/CN=localhost
+issuer=/CN=localhost
+---
+No client certificate CA names sent
+Peer signing digest: SHA512
+Server Temp Key: X25519, 253 bits
+---
+SSL handshake has read 1019 bytes and written 269 bytes
+Verification error: self signed certificate
+---
+New, TLSv1.2, Cipher is ECDHE-RSA-AES256-GCM-SHA384
+Server public key is 1024 bit
+Secure Renegotiation IS supported
+Compression: NONE
+Expansion: NONE
+No ALPN negotiated
+SSL-Session:
+    Protocol  : TLSv1.2
+    Cipher    : ECDHE-RSA-AES256-GCM-SHA384
+    Session-ID: 4B29892D6E8C20A022AC5DA4BCA5E0C8C5C4480C2B7A8A5B80210F43E5104166
+    Session-ID-ctx: 
+    Master-Key: 69C835DE2ACCE24B47FF35EFC783E69EF00E7C1AA0ABE7205CB57B49962C6AD2E6572EEC8C3F5434BB1B0ECFB33C3B80
+    PSK identity: None
+    PSK identity hint: None
+    SRP username: None
+    TLS session ticket lifetime hint: 7200 (seconds)
+    TLS session ticket:
+    0000 - 63 2b 91 29 36 5b 10 08-a3 16 68 1e e1 f3 bd 40   c+.)6[....h....@
+    0010 - 85 83 78 9c 1e ac f2 6d-e4 68 b5 7c 9e cd 71 1a   ..x....m.h.|..q.
+    0020 - e0 3b cc df 44 ca c9 cd-bc bd 74 9f 5d 92 ee 78   .;..D.....t.]..x
+    0030 - 93 71 b6 11 7c d8 2f 28-58 ef 73 ef ca 8c 2d 18   .q..|./(X.s...-.
+    0040 - 53 44 84 19 99 e3 9f 97-c5 f5 53 9c 64 a9 33 e3   SD........S.d.3.
+    0050 - 9f 3d 37 aa aa 80 15 d1-c5 78 df 03 ae 8b f6 07   .=7......x......
+    0060 - 72 35 d5 65 c0 7a 63 c1-3d 93 7e 2a cc b2 24 30   r5.e.zc.=.~*..$0
+    0070 - f2 3b 6a 34 a0 79 2c 86-46 63 da ab 07 b6 0a 55   .;j4.y,.Fc.....U
+    0080 - a6 97 82 33 04 58 bc 73-e3 7b 2d 0e f4 25 5f db   ...3.X.s.{-..%_.
+    0090 - 8c 1c 01 9a a5 da 47 bc-2b 52 59 e8 36 cf 1b 68   ......G.+RY.6..h
+
+    Start Time: 1577942311
+    Timeout   : 7200 (sec)
+    Verify return code: 18 (self signed certificate)
+    Extended master secret: yes
+---
+cluFn7wTiGryunymYOu4RcffSxQluehd
+Correct!
+-----BEGIN RSA PRIVATE KEY-----
+MIIEogIBAAKCAQEAvmOkuifmMg6HL2YPIOjon6iWfbp7c3jx34YkYWqUH57SUdyJ
+imZzeyGC0gtZPGujUSxiJSWI/oTqexh+cAMTSMlOJf7+BrJObArnxd9Y7YT2bRPQ
+Ja6Lzb558YW3FZl87ORiO+rW4LCDCNd2lUvLE/GL2GWyuKN0K5iCd5TbtJzEkQTu
+DSt2mcNn4rhAL+JFr56o4T6z8WWAW18BR6yGrMq7Q/kALHYW3OekePQAzL0VUYbW
+JGTi65CxbCnzc/w4+mqQyvmzpWtMAzJTzAzQxNbkR2MBGySxDLrjg0LWN6sK7wNX
+x0YVztz/zbIkPjfkU1jHS+9EbVNj+D1XFOJuaQIDAQABAoIBABagpxpM1aoLWfvD
+KHcj10nqcoBc4oE11aFYQwik7xfW+24pRNuDE6SFthOar69jp5RlLwD1NhPx3iBl
+J9nOM8OJ0VToum43UOS8YxF8WwhXriYGnc1sskbwpXOUDc9uX4+UESzH22P29ovd
+d8WErY0gPxun8pbJLmxkAtWNhpMvfe0050vk9TL5wqbu9AlbssgTcCXkMQnPw9nC
+YNN6DDP2lbcBrvgT9YCNL6C+ZKufD52yOQ9qOkwFTEQpjtF4uNtJom+asvlpmS8A
+vLY9r60wYSvmZhNqBUrj7lyCtXMIu1kkd4w7F77k+DjHoAXyxcUp1DGL51sOmama
++TOWWgECgYEA8JtPxP0GRJ+IQkX262jM3dEIkza8ky5moIwUqYdsx0NxHgRRhORT
+8c8hAuRBb2G82so8vUHk/fur85OEfc9TncnCY2crpoqsghifKLxrLgtT+qDpfZnx
+SatLdt8GfQ85yA7hnWWJ2MxF3NaeSDm75Lsm+tBbAiyc9P2jGRNtMSkCgYEAypHd
+HCctNi/FwjulhttFx/rHYKhLidZDFYeiE/v45bN4yFm8x7R/b0iE7KaszX+Exdvt
+SghaTdcG0Knyw1bpJVyusavPzpaJMjdJ6tcFhVAbAjm7enCIvGCSx+X3l5SiWg0A
+R57hJglezIiVjv3aGwHwvlZvtszK6zV6oXFAu0ECgYAbjo46T4hyP5tJi93V5HDi
+Ttiek7xRVxUl+iU7rWkGAXFpMLFteQEsRr7PJ/lemmEY5eTDAFMLy9FL2m9oQWCg
+R8VdwSk8r9FGLS+9aKcV5PI/WEKlwgXinB3OhYimtiG2Cg5JCqIZFHxD6MjEGOiu
+L8ktHMPvodBwNsSBULpG0QKBgBAplTfC1HOnWiMGOU3KPwYWt0O6CdTkmJOmL8Ni
+blh9elyZ9FsGxsgtRBXRsqXuz7wtsQAgLHxbdLq/ZJQ7YfzOKU4ZxEnabvXnvWkU
+YOdjHdSOoKvDQNWu6ucyLRAWFuISeXw9a/9p7ftpxm0TSgyvmfLF2MIAEwyzRqaM
+77pBAoGAMmjmIJdjp+Ez8duyn3ieo36yrttF5NSsJLAbxFpdlc1gvtGCWW+9Cq0b
+dxviW8+TFVEBl1O4f7HVm6EpTscdDxU+bCXWkfjuRb7Dy9GOtt9JPsX8MBTakzh3
+vBgsyi/sN3RqRBcGU40fOoZyfAMT8s1m/uYv52O6IgeuZ/ujbjY=
+-----END RSA PRIVATE KEY-----
+
+closed
+bandit16@bandit:/tmp/Pixailz$ touch ssh.key
+#nano copy the fresh RSA Private Key
+bandit16@bandit:/tmp/Pixailz$ ls
+ssh.key
+bandit16@bandit:/tmp/Pixailz$ cat ssh.key 
+-----BEGIN RSA PRIVATE KEY-----
+MIIEogIBAAKCAQEAvmOkuifmMg6HL2YPIOjon6iWfbp7c3jx34YkYWqUH57SUdyJ
+imZzeyGC0gtZPGujUSxiJSWI/oTqexh+cAMTSMlOJf7+BrJObArnxd9Y7YT2bRPQ
+Ja6Lzb558YW3FZl87ORiO+rW4LCDCNd2lUvLE/GL2GWyuKN0K5iCd5TbtJzEkQTu
+DSt2mcNn4rhAL+JFr56o4T6z8WWAW18BR6yGrMq7Q/kALHYW3OekePQAzL0VUYbW
+JGTi65CxbCnzc/w4+mqQyvmzpWtMAzJTzAzQxNbkR2MBGySxDLrjg0LWN6sK7wNX
+x0YVztz/zbIkPjfkU1jHS+9EbVNj+D1XFOJuaQIDAQABAoIBABagpxpM1aoLWfvD
+KHcj10nqcoBc4oE11aFYQwik7xfW+24pRNuDE6SFthOar69jp5RlLwD1NhPx3iBl
+J9nOM8OJ0VToum43UOS8YxF8WwhXriYGnc1sskbwpXOUDc9uX4+UESzH22P29ovd
+d8WErY0gPxun8pbJLmxkAtWNhpMvfe0050vk9TL5wqbu9AlbssgTcCXkMQnPw9nC
+YNN6DDP2lbcBrvgT9YCNL6C+ZKufD52yOQ9qOkwFTEQpjtF4uNtJom+asvlpmS8A
+vLY9r60wYSvmZhNqBUrj7lyCtXMIu1kkd4w7F77k+DjHoAXyxcUp1DGL51sOmama
++TOWWgECgYEA8JtPxP0GRJ+IQkX262jM3dEIkza8ky5moIwUqYdsx0NxHgRRhORT
+8c8hAuRBb2G82so8vUHk/fur85OEfc9TncnCY2crpoqsghifKLxrLgtT+qDpfZnx
+SatLdt8GfQ85yA7hnWWJ2MxF3NaeSDm75Lsm+tBbAiyc9P2jGRNtMSkCgYEAypHd
+HCctNi/FwjulhttFx/rHYKhLidZDFYeiE/v45bN4yFm8x7R/b0iE7KaszX+Exdvt
+SghaTdcG0Knyw1bpJVyusavPzpaJMjdJ6tcFhVAbAjm7enCIvGCSx+X3l5SiWg0A
+R57hJglezIiVjv3aGwHwvlZvtszK6zV6oXFAu0ECgYAbjo46T4hyP5tJi93V5HDi
+Ttiek7xRVxUl+iU7rWkGAXFpMLFteQEsRr7PJ/lemmEY5eTDAFMLy9FL2m9oQWCg
+R8VdwSk8r9FGLS+9aKcV5PI/WEKlwgXinB3OhYimtiG2Cg5JCqIZFHxD6MjEGOiu
+L8ktHMPvodBwNsSBULpG0QKBgBAplTfC1HOnWiMGOU3KPwYWt0O6CdTkmJOmL8Ni
+blh9elyZ9FsGxsgtRBXRsqXuz7wtsQAgLHxbdLq/ZJQ7YfzOKU4ZxEnabvXnvWkU
+YOdjHdSOoKvDQNWu6ucyLRAWFuISeXw9a/9p7ftpxm0TSgyvmfLF2MIAEwyzRqaM
+77pBAoGAMmjmIJdjp+Ez8duyn3ieo36yrttF5NSsJLAbxFpdlc1gvtGCWW+9Cq0b
+dxviW8+TFVEBl1O4f7HVm6EpTscdDxU+bCXWkfjuRb7Dy9GOtt9JPsX8MBTakzh3
+vBgsyi/sN3RqRBcGU40fOoZyfAMT8s1m/uYv52O6IgeuZ/ujbjY=
+-----END RSA PRIVATE KEY-----
+bandit16@bandit:/tmp/Pixailz$ ssh -i ssh.key bandit17@localhost
+
+========================================================================================================================
+Flag_Bandit_16=[xLYVMN9WE5zQ5vHacb0sZEVqbrp7nBTn]
+========================================================================================================================
+
+========================================================================================================================
+bandit17
+========================================================================================================================
+GOAL
+------------------------------------------------------------------------------------------------------------------------
+There are 2 files in the homedirectory: passwords.old and passwords.new. The password 
+for the next level is in passwords.new and is the only line that has been changed between 
+passwords.old and passwords.new
+
+NOTE: if you have solved this level and see ‘Byebye!’ when trying to log into 
+bandit18, this is related to the next level, bandit19
+========================================================================================================================
+bandit16@bandit:/tmp/Pixailz$ ssh -i ssh.key bandit17@localhost
+bandit17@bandit:~$ diff passwords.old passwords.new
+42c42
+< hlbSBPAWJmL6WFDb06gpTx1pPButblOA
+---
+> kfBf3eYk5BPBRzwjqutbbfE887SVc5Yd
+
+========================================================================================================================
+Flag_Bandit_17=[kfBf3eYk5BPBRzwjqutbbfE887SVc5Yd]
+========================================================================================================================
+
+========================================================================================================================
+bandit18
+========================================================================================================================
+GOAL
+------------------------------------------------------------------------------------------------------------------------
+The password for the next level is stored in a file readme in the homedirectory. 
+Unfortunately, someone has modified .bashrc to log you out when you log in with SSH.
+========================================================================================================================
+pix@parrot:~$ ssh bandit18@bandit.labs.overthewire.org -p 2220
+pix@parrot:~$ ssh bandit18@bandit.labs.overthewire.org -p 2220 ls
+This is a OverTheWire game server. More information on http://www.overthewire.org/wargames
+
+bandit18@bandit.labs.overthewire.org's password: 
+readme
+pix@parrot:~$ ssh bandit18@bandit.labs.overthewire.org -p 2220 cat readme
+This is a OverTheWire game server. More information on http://www.overthewire.org/wargames
+
+bandit18@bandit.labs.overthewire.org's password: 
+IueksS7Ubh8G3DCwVzrTd8rAVOwq3M5x
+
+========================================================================================================================
+Flag_Bandit_18=[IueksS7Ubh8G3DCwVzrTd8rAVOwq3M5x]
+========================================================================================================================
+
+========================================================================================================================
+bandit19
+========================================================================================================================
+GOAL
+------------------------------------------------------------------------------------------------------------------------
+To gain access to the next level, you should use the setuid binary in the homedirectory. 
+Execute it without arguments to find out how to use it. The password for this level can be 
+found in the usual place (/etc/bandit_pass), after you have used the setuid binary.
+========================================================================================================================
+pix@parrot:~$ ssh bandit19@bandit.labs.overthewire.org -p 2220
+bandit19@bandit:~$ ls -la 
+total 28
+drwxr-xr-x  2 root     root     4096 Oct 16  2018 .
+drwxr-xr-x 41 root     root     4096 Oct 16  2018 ..
+-rwsr-x---  1 bandit20 bandit19 7296 Oct 16  2018 bandit20-do
+-rw-r--r--  1 root     root      220 May 15  2017 .bash_logout
+-rw-r--r--  1 root     root     3526 May 15  2017 .bashrc
+-rw-r--r--  1 root     root      675 May 15  2017 .profile
+bandit19@bandit:~$ file bandit20-do 
+bandit20-do: setuid ELF 32-bit LSB executable, Intel 80386, version 1 (SYSV), dynamically linked, interpreter /lib/ld-linux.so.2, for GNU/Linux 2.6.32, BuildID[sha1]=8e941f24b8c5cd0af67b22b724c57e1ab92a92a1, not stripped
+bandit19@bandit:~$ ./bandit20-do 
+Run a command as another user.
+  Example: ./bandit20-do id
+bandit19@bandit:~$ ./bandit20-do id
+uid=11019(bandit19) gid=11019(bandit19) euid=11020(bandit20) groups=11019(bandit19)
+bandit19@bandit:~$ ./bandit20-do whoami
+bandit20
+bandit19@bandit:~$ ./bandit20-do cat /etc/bandit_pass/bandit20 
+GbKksEFF4yrVs6il55v6gwY5aVje5f0j
+
+========================================================================================================================
+Flag_Bandit_19=[GbKksEFF4yrVs6il55v6gwY5aVje5f0j]
+========================================================================================================================
+
+========================================================================================================================
+bandit20
+========================================================================================================================
+GOAL
+------------------------------------------------------------------------------------------------------------------------
+There is a setuid binary in the homedirectory that does the following: it makes a connection 
+to localhost on the port you specify as a commandline argument. It then reads a line of text 
+from the connection and compares it to the password in the previous level (bandit20). If the 
+password is correct, it will transmit the password for the next level (bandit21).
+
+NOTE: Try connecting to your own network daemon to see if it works as you think
+========================================================================================================================
+pix@parrot:~$ ssh bandit20@bandit.labs.overthewire.org -p 2220
+bandit20@bandit:~$ nc -l -p 1234
+GbKksEFF4yrVs6il55v6gwY5aVje5f0j
+bandit20@bandit:~$ ./suconnect 1234
+Read: GbKksEFF4yrVs6il55v6gwY5aVje5f0j
+Password matches, sending next password
+bandit20@bandit:~$ nc -l -p 1234
+GbKksEFF4yrVs6il55v6gwY5aVje5f0j
+gE269g2h3mw3pwgrj0Ha9Uoqen1c9DGr
+
+========================================================================================================================
+Flag_Bandit_20=[gE269g2h3mw3pwgrj0Ha9Uoqen1c9DGr]
+========================================================================================================================
+
+========================================================================================================================
+bandit21
+========================================================================================================================
+GOAL
+------------------------------------------------------------------------------------------------------------------------
+A program is running automatically at regular intervals from cron, the time-based job 
+scheduler. Look in /etc/cron.d/ for the configuration and see what command is being 
+executed.
+========================================================================================================================
+pix@parrot:~$ ssh bandit21@bandit.labs.overthewire.org -p 2220
+bandit21@bandit:~$ cat /etc/cron.d/cronjob_bandit22
+@reboot bandit22 /usr/bin/cronjob_bandit22.sh &> /dev/null
+* * * * * bandit22 /usr/bin/cronjob_bandit22.sh &> /dev/null
+bandit21@bandit:~$ cat /usr/bin/cronjob_bandit22.sh
+#!/bin/bash
+chmod 644 /tmp/t7O6lds9S0RqQh9aMcz6ShpAoZKF7fgv
+cat /etc/bandit_pass/bandit22 > /tmp/t7O6lds9S0RqQh9aMcz6ShpAoZKF7fgv
+bandit21@bandit:~$ cat /tmp/t7O6lds9S0RqQh9aMcz6ShpAoZKF7fgv
+Yk7owGAcWjwMVRwrTesJEwB7WVOiILLI
+
+========================================================================================================================
+Flag_Bandit_21=[Yk7owGAcWjwMVRwrTesJEwB7WVOiILLI]
+========================================================================================================================
+
+========================================================================================================================
+bandit22
+========================================================================================================================
+GOAL
+------------------------------------------------------------------------------------------------------------------------
+A program is running automatically at regular intervals from cron, the time-based job 
+scheduler. Look in /etc/cron.d/ for the configuration and see what command is being 
+executed.
+
+NOTE: Looking at shell scripts written by other people is a very useful skill. The script for 
+this level is intentionally made easy to read. If you are having problems understanding what 
+it does, try executing it to see the debug information it prints.
+========================================================================================================================
+pix@parrot:~$ ssh bandit22@bandit.labs.overthewire.org -p 2220
+bandit22@bandit:~$ cat /etc/cron.d/cronjob_bandit23
+@reboot bandit23 /usr/bin/cronjob_bandit23.sh  &> /dev/null
+* * * * * bandit23 /usr/bin/cronjob_bandit23.sh  &> /dev/null
+bandit22@bandit:~$ cat /usr/bin/cronjob_bandit23.sh 
+#!/bin/bash
+
+myname=$(whoami)
+mytarget=$(echo I am user $myname | md5sum | cut -d ' ' -f 1)
+
+echo "Copying passwordfile /etc/bandit_pass/$myname to /tmp/$mytarget"
+
+cat /etc/bandit_pass/$myname > /tmp/$mytarget
+bandit22@bandit:~$ echo I am user bandit23 | md5sum | cut -d ' ' -f 1
+8ca319486bfbbc3663ea0fbe81326349
+bandit22@bandit:~$ cat /tmp/8ca319486bfbbc3663ea0fbe81326349
+jc1udXuA1tiHqjIsL8yaapX5XIAI6i0n
+
+========================================================================================================================
+Flag_Bandit_22=[jc1udXuA1tiHqjIsL8yaapX5XIAI6i0n]
+========================================================================================================================
+
+========================================================================================================================
+bandit23
+========================================================================================================================
+GOAL
+------------------------------------------------------------------------------------------------------------------------
+A program is running automatically at regular intervals from cron, the time-based job 
+scheduler. Look in /etc/cron.d/ for the configuration and see what command is being 
+executed.
+
+NOTE: This level requires you to create your own first shell-script. This is a very big step 
+and you should be proud of yourself when you beat this level!
+
+NOTE 2: Keep in mind that your shell script is removed once executed, so you may want to 
+keep a copy around…
+========================================================================================================================
+pix@parrot:~$ ssh bandit23@bandit.labs.overthewire.org -p 2220
+bandit23@bandit:~$ mkdir /tmp/Pixailz
+bandit23@bandit:~$ cd /tmp/Pixailz
+bandit23@bandit:/tmp/Pixailz$ touch catPass.sh
+bandit23@bandit:/tmp/Pixailz$ nano catPass.sh
+bandit23@bandit:/tmp/Pixailz$ cat catPass.sh
+#! /bin/bash
+cat /etc/bandit_pass/bandit24 > /tmp/Pixailz/pass
+bandit23@bandit:/tmp/Pixailz$ chmod 777 catPass.sh 
+bandit23@bandit:/tmp/Pixailz$ chmod 777 /tmp/Pixailz
+bandit23@bandit:/tmp/Pixailz$ cp catPass.sh /var/spool/bandit24/
+bandit23@bandit:/tmp/Pixailz$ ls 
+catPass.sh
+#an eternity later ... (joke)
+bandit23@bandit:/tmp/Pixailz$ ls 
+catPass.sh  pass
+bandit23@bandit:/tmp/Pixailz$ cat pass 
+UoMYTrfrBFHyQXmg6gzctqAwOmw1IohZ
+
+========================================================================================================================
+Flag_Bandit_23=[UoMYTrfrBFHyQXmg6gzctqAwOmw1IohZ]
+========================================================================================================================
+
+========================================================================================================================
+bandit24
+========================================================================================================================
+GOAL
+------------------------------------------------------------------------------------------------------------------------
+A daemon is listening on port 30002 and will give you the password for bandit25 if given 
+the password for bandit24 and a secret numeric 4-digit pincode. There is no way to retrieve 
+the pincode except by going through all of the 10000 combinations, called brute-forcing.
+========================================================================================================================
+pix@parrot:~$ ssh bandit24@bandit.labs.overthewire.org -p 2220
+bandit24@bandit:~$ cd /tmp/Pixailz
+bandit24@bandit:/tmp/Pixailz$ touch bruteForce.sh
+bandit24@bandit:/tmp/Pixailz$ chmod 777 bruteForce.sh
+bandit24@bandit:/tmp/Pixailz$ nano bruteForce.sh
+bandit24@bandit:/tmp/Pixailz$ cat bruteForce.sh
+#!/bin/bash
+
+bandit24=UoMYTrfrBFHyQXmg6gzctqAwOmw1IohZ
+
+for pin in {0000..9999}; do
+	echo "$bandit24 $pin"
+done | nc localhost 30002
+
+bandit24@bandit:/tmp/Pixailz$ ./bruteForce.sh
+I am the pincode checker for user bandit25. Please enter the password for user bandit24 and the secret pincode on a single line, separated by a space.
+Wrong! Please enter the correct pincode. Try again.
+Wrong! Please enter the correct pincode. Try again.
+Wrong! Please enter the correct pincode. Try again.
+Wrong! Please enter the correct pincode. Try again.
+#few attempt later
+Wrong! Please enter the correct pincode. Try again.
+Correct!
+The password of user bandit25 is uNG9O58gUE7snukf3bvZ0rxhtnjzSGzG
+
+Exiting.
+
+========================================================================================================================
+Flag_Bandit_24=[uNG9O58gUE7snukf3bvZ0rxhtnjzSGzG]
+========================================================================================================================
+
+========================================================================================================================
+bandit25
+========================================================================================================================
+GOAL
+------------------------------------------------------------------------------------------------------------------------
+Logging in to bandit26 from bandit25 should be fairly easy… The shell for user bandit26 is 
+not /bin/bash, but something else. Find out what it is, how it works and how to break out of 
+it.
+========================================================================================================================
+pix@parrot:~$ ssh bandit25@bandit.labs.overthewire.org -p 2220
+#lil' trick make the windows little to pause vi in more state
+bandit25@bandit:~$ ssh bandit26@localhost -i bandit26.sshkey
+Could not create directory '/home/bandit25/.ssh'.
+The authenticity of host 'localhost (127.0.0.1)' can't be established.
+ECDSA key fingerprint is SHA256:98UL0ZWr85496EtCRkKlo20X3OPnyPSB5tB5RPbhczc.
+Are you sure you want to continue connecting (yes/no)? yes
+Failed to add the host to the list of known hosts (/home/bandit25/.ssh/known_hosts).
+This is a OverTheWire game server. More information on http://www.overthewire.org/wargames
+
+Linux bandit 4.18.12 x86_64 GNU/Linux
+               
+      ,----..            ,----,          .---. 
+     /   /   \         ,/   .`|         /. ./|
+    /   .     :      ,`   .'  :     .--'.  ' ;
+   .   /   ;.  \   ;    ;     /    /__./ \ : |
+  .   ;   /  ` ; .'___,/    ,' .--'.  '   \' .
+  ;   |  ; \ ; | |    :     | /___/ \ |    ' ' 
+  |   :  | ; | ' ;    |.';  ; ;   \  \;      : 
+  .   |  ' ' ' : `----'  |  |  \   ;  `      |
+  '   ;  \; /  |     '   :  ;   .   \    .\  ; 
+   \   \  ',  /      |   |  '    \   \   ' \ |
+    ;   :    /       '   :  |     :   '  |--"  
+     \   \ .'        ;   |.'       \   \ ;     
+  www. `---` ver     '---' he       '---" ire.org     
+               
+              
+Welcome to OverTheWire!
+
+If you find any problems, please report them to Steven or morla on
+irc.overthewire.org.
+
+--[ Playing the games ]--
+
+  This machine might hold several wargames. 
+  If you are playing "somegame", then:
+
+    * USERNAMES are somegame0, somegame1, ...
+    * Most LEVELS are stored in /somegame/.
+    * PASSWORDS for each level are stored in /etc/somegame_pass/.
+
+  Write-access to homedirectories is disabled. It is advised to create a
+  working directory with a hard-to-guess name in /tmp/.  You can use the
+  command "mktemp -d" in order to generate a random and hard to guess
+  directory in /tmp/.  Read-access to both /tmp/ and /proc/ is disabled
+  so that users can not snoop on eachother. Files and directories with 
+  easily guessable or short names will be periodically deleted!
+	
+  Please play nice:
+      
+    * don't leave orphan processes running
+    * don't leave exploit-files laying around
+    * don't annoy other players
+    * don't post passwords or spoilers
+    * again, DONT POST SPOILERS! 
+      This includes writeups of your solution on your blog or website!
+
+--[ Tips ]--
+
+  This machine has a 64bit processor and many security-features enabled
+  by default, although ASLR has been switched off.  The following
+  compiler flags might be interesting:
+
+    -m32                    compile for 32bit
+    -fno-stack-protector    disable ProPolice
+    -Wl,-z,norelro          disable relro 
+
+  In addition, the execstack tool can be used to flag the stack as
+  executable on ELF binaries.
+
+  Finally, network-access is limited for most levels by a local
+  firewall.
+
+--[ Tools ]--
+
+ For your convenience we have installed a few usefull tools which you can find
+ in the following locations:
+
+    * pwndbg (https://github.com/pwndbg/pwndbg) in /usr/local/pwndbg/
+    * peda (https://github.com/longld/peda.git) in /usr/local/peda/
+    * gdbinit (https://github.com/gdbinit/Gdbinit) in /usr/local/gdbinit/
+    * pwntools (https://github.com/Gallopsled/pwntools)
+    * radare2 (http://www.radare.org/)
+    * checksec.sh (http://www.trapkit.de/tools/checksec.html) in /usr/local/bin/checksec.sh
+
+--[ More information ]--
+
+  For more information regarding individual wargames, visit
+  http://www.overthewire.org/wargames/
+
+  For support, questions or comments, contact us through IRC on
+  irc.overthewire.org #wargames.
+
+  Enjoy your stay!
+
+  _                     _ _ _   ___   __  
+ | |                   | (_) | |__ \ / /  
+ | |__   __ _ _ __   __| |_| |_   ) / /_  
+ | '_ \ / _` | '_ \ / _` | | __| / / '_ \ 
+--More--(66%)
+#press v to enter in viTextEditor
+  _                     _ _ _   ___   __
+ | |                   | (_) | |__ \ / /
+ | |__   __ _ _ __   __| |_| |_   ) / /_
+ | '_ \ / _` | '_ \ / _` | | __| / / '_ \
+ | |_) | (_| | | | | (_| | | |_ / /| (_) |
+ |_.__/ \__,_|_| |_|\__,_|_|\__|____\___/
+~                                                                                                                                       
+~                                                                                                                                       
+~                                                                                                                                       
+~                                                                                                                                       
+~                                                                                                                                       
+~                                                                                                                                       
+~                                                                                                                                       
+~                                                                                                                                       
+~                                                                                                                                       
+~                                                                                                                                       
+~                                                                                                                                       
+~                                                                                                                                       
+~                                                                                                                                       
+~                                                                                                                                       
+~                                                                                                                                       
+~                                                                                                                                       
+~                                                                                                                                       
+~                                                                                                                                       
+~                                                                                                                                       
+~                                                                                                                                       
+~                                                                                                                                       
+~                                                                                                                                       
+~                                                                                                                                       
+~                                                                                                                                       
+~                                                                                                                                       
+"~/text.txt" [readonly] 6L, 258C                                                                                      1,3           All
+#type :e /etc/bandit_pass/bandit26 and hit enter to edit password
+5czgV9L3Xx8JPOyRbXh6lQbmIOWvPT6Z
+~                                                                                                                                       
+~                                                                                                                                       
+~                                                                                                                                       
+~                                                                                                                                       
+~                                                                                                                                       
+~                                                                                                                                       
+~                                                                                                                                       
+~                                                                                                                                       
+~                                                                                                                                       
+~                                                                                                                                       
+~                                                                                                                                       
+~                                                                                                                                       
+~                                                                                                                                       
+~                                                                                                                                       
+~                                                                                                                                       
+~                                                                                                                                       
+~                                                                                                                                       
+~                                                                                                                                       
+~                                                                                                                                       
+~                                                                                                                                       
+~                                                                                                                                       
+~                                                                                                                                       
+~                                                                                                                                       
+~                                                                                                                                       
+~                                                                                                                                       
+~                                                                                                                                       
+~                                                                                                                                       
+~                                                                                                                                       
+~                                                                                                                                       
+~                                                                                                                                       
+"/etc/bandit_pass/bandit26" [readonly] 1L, 33C                                                                        1,1           All
+
+========================================================================================================================
+Flag_Bandit_25=[5czgV9L3Xx8JPOyRbXh6lQbmIOWvPT6Z]
+========================================================================================================================
+
+========================================================================================================================
+bandit26
+========================================================================================================================
+GOAL
+------------------------------------------------------------------------------------------------------------------------
+Good job getting a shell! Now hurry and grab the password for bandit27!
+========================================================================================================================
+#minimize trick with more (rf. bandit25
+pix@parrot:~$ ssh bandit26@bandit.labs.overthewire.org -p 2220
+This is a OverTheWire game server. More information on http://www.overthewire.org/wargames
+
+bandit26@bandit.labs.overthewire.org's password: 
+Permission denied, please try again.
+bandit26@bandit.labs.overthewire.org's password: 
+Linux bandit 4.18.12 x86_64 GNU/Linux
+               
+      ,----..            ,----,          .---. 
+     /   /   \         ,/   .`|         /. ./|
+    /   .     :      ,`   .'  :     .--'.  ' ;
+   .   /   ;.  \   ;    ;     /    /__./ \ : |
+  .   ;   /  ` ; .'___,/    ,' .--'.  '   \' .
+  ;   |  ; \ ; | |    :     | /___/ \ |    ' ' 
+  |   :  | ; | ' ;    |.';  ; ;   \  \;      : 
+  .   |  ' ' ' : `----'  |  |  \   ;  `      |
+  '   ;  \; /  |     '   :  ;   .   \    .\  ; 
+   \   \  ',  /      |   |  '    \   \   ' \ |
+    ;   :    /       '   :  |     :   '  |--"  
+     \   \ .'        ;   |.'       \   \ ;     
+  www. `---` ver     '---' he       '---" ire.org     
+               
+              
+Welcome to OverTheWire!
+
+If you find any problems, please report them to Steven or morla on
+irc.overthewire.org.
+
+--[ Playing the games ]--
+
+  This machine might hold several wargames. 
+  If you are playing "somegame", then:
+
+    * USERNAMES are somegame0, somegame1, ...
+    * Most LEVELS are stored in /somegame/.
+    * PASSWORDS for each level are stored in /etc/somegame_pass/.
+
+  Write-access to homedirectories is disabled. It is advised to create a
+  working directory with a hard-to-guess name in /tmp/.  You can use the
+  command "mktemp -d" in order to generate a random and hard to guess
+  directory in /tmp/.  Read-access to both /tmp/ and /proc/ is disabled
+  so that users can not snoop on eachother. Files and directories with 
+  easily guessable or short names will be periodically deleted!
+	
+  Please play nice:
+      
+    * don't leave orphan processes running
+    * don't leave exploit-files laying around
+    * don't annoy other players
+    * don't post passwords or spoilers
+    * again, DONT POST SPOILERS! 
+      This includes writeups of your solution on your blog or website!
+
+--[ Tips ]--
+
+  This machine has a 64bit processor and many security-features enabled
+  by default, although ASLR has been switched off.  The following
+  compiler flags might be interesting:
+
+    -m32                    compile for 32bit
+    -fno-stack-protector    disable ProPolice
+    -Wl,-z,norelro          disable relro 
+
+  In addition, the execstack tool can be used to flag the stack as
+  executable on ELF binaries.
+
+  Finally, network-access is limited for most levels by a local
+  firewall.
+
+--[ Tools ]--
+
+ For your convenience we have installed a few usefull tools which you can find
+ in the following locations:
+
+    * pwndbg (https://github.com/pwndbg/pwndbg) in /usr/local/pwndbg/
+    * peda (https://github.com/longld/peda.git) in /usr/local/peda/
+    * gdbinit (https://github.com/gdbinit/Gdbinit) in /usr/local/gdbinit/
+    * pwntools (https://github.com/Gallopsled/pwntools)
+    * radare2 (http://www.radare.org/)
+    * checksec.sh (http://www.trapkit.de/tools/checksec.html) in /usr/local/bin/checksec.sh
+
+--[ More information ]--
+
+  For more information regarding individual wargames, visit
+  http://www.overthewire.org/wargames/
+
+  For support, questions or comments, contact us through IRC on
+  irc.overthewire.org #wargames.
+
+  Enjoy your stay!
+
+  _                     _ _ _   ___   __
+ | |                   | (_) | |__ \ / /
+ | |__   __ _ _ __   __| |_| |_   ) / /_
+:shell 
+#type :set shell=/bin/bash and :shell to open a shell with bandit26
+bandit26@bandit:~$ ./bandit27-do cat /etc/bandit_pass/bandit27
+3ba3118a22e93127a4ed485be72ef5ea
+
+========================================================================================================================
+Flag_Bandit_26=[3ba3118a22e93127a4ed485be72ef5ea]
+========================================================================================================================
+
+========================================================================================================================
+bandit27
+========================================================================================================================
+GOAL
+------------------------------------------------------------------------------------------------------------------------
+There is a git repository at ssh://bandit27-git@localhost/home/bandit27-
+git/repo. The password for the user bandit27-git is the same as for the user 
+bandit27.
+
+Clone the repository and find the password for the next level.
+========================================================================================================================
+pix@parrot:~$ ssh bandit27@bandit.labs.overthewire.org -p 2220
+bandit27@bandit:/tmp/Pixailz$ git clone ssh://bandit27-git@localhost/home/bandit27-git/repo
+Cloning into 'repo'...
+Could not create directory '/home/bandit27/.ssh'.
+The authenticity of host 'localhost (127.0.0.1)' can't be established.
+ECDSA key fingerprint is SHA256:98UL0ZWr85496EtCRkKlo20X3OPnyPSB5tB5RPbhczc.
+Are you sure you want to continue connecting (yes/no)? yes
+Failed to add the host to the list of known hosts (/home/bandit27/.ssh/known_hosts).
+This is a OverTheWire game server. More information on http://www.overthewire.org/wargames
+
+bandit27-git@localhost's password: 
+#pass for bandit27-git same as bandit27
+remote: Counting objects: 3, done.
+remote: Compressing objects: 100% (2/2), done.
+remote: Total 3 (delta 0), reused 0 (delta 0)
+Receiving objects: 100% (3/3), done.
+bandit27@bandit:/tmp/Pixailz$ ls 
+repo
+bandit27@bandit:/tmp/Pixailz/repo$ ls 
+README
+bandit27@bandit:/tmp/Pixailz/repo$ cat README 
+The password to the next level is: 0ef186ac70e04ea33b4c1853d2526fa2
+
+========================================================================================================================
+Flag_Bandit_27=[0ef186ac70e04ea33b4c1853d2526fa2]
+========================================================================================================================
+
+========================================================================================================================
+bandit28
+========================================================================================================================
+GOAL
+------------------------------------------------------------------------------------------------------------------------
+There is a git repository at ssh://bandit28-git@localhost/home/bandit28-
+git/repo. The password for the user bandit28-git is the same as for the user 
+bandit28.
+
+Clone the repository and find the password for the next level.
+========================================================================================================================
+pix@parrot:~$ ssh bandit28@bandit.labs.overthewire.org -p 2220
+bandit28@bandit:~$ cd /tmp/Pixailz
+bandit28@bandit:/tmp/Pixailz$ git clone ssh://bandit28-git@localhost/home/bandit28-git/repo.git
+Cloning into 'repo'...
+Could not create directory '/home/bandit28/.ssh'.
+The authenticity of host 'localhost (127.0.0.1)' can't be established.
+ECDSA key fingerprint is SHA256:98UL0ZWr85496EtCRkKlo20X3OPnyPSB5tB5RPbhczc.
+Are you sure you want to continue connecting (yes/no)? ye
+Please type 'yes' or 'no': yes
+Failed to add the host to the list of known hosts (/home/bandit28/.ssh/known_hosts).
+This is a OverTheWire game server. More information on http://www.overthewire.org/wargames
+
+bandit28-git@localhost's password: 
+remote: Counting objects: 9, done.
+remote: Compressing objects: 100% (6/6), done.
+remote: Total 9 (delta 2), reused 0 (delta 0)
+Receiving objects: 100% (9/9), done.
+Resolving deltas: 100% (2/2), done.
+bandit28@bandit:/tmp/Pixailz/repo$ cat README.md
+# Bandit Notes
+Some notes for level29 of bandit.
+
+## credentials
+
+- username: bandit29
+- password: xxxxxxxxxx
+
+bandit28@bandit:/tmp/Pixailz/repo$ git log
+commit 073c27c130e6ee407e12faad1dd3848a110c4f95
+Author: Morla Porla <morla@overthewire.org>
+Date:   Tue Oct 16 14:00:39 2018 +0200
+
+    fix info leak
+
+commit 186a1038cc54d1358d42d468cdc8e3cc28a93fcb
+Author: Morla Porla <morla@overthewire.org>
+Date:   Tue Oct 16 14:00:39 2018 +0200
+
+    add missing data
+
+commit b67405defc6ef44210c53345fc953e6a21338cc7
+Author: Ben Dover <noone@overthewire.org>
+Date:   Tue Oct 16 14:00:39 2018 +0200
+
+    initial commit of README.md
+bandit28@bandit:/tmp/Pixailz/repo$ git checkout 186a1038cc54d1358d42d468cdc8e3cc28a93fcb
+Previous HEAD position was 073c27c... fix info leak
+HEAD is now at 186a103... add missing data
+bandit28@bandit:/tmp/Pixailz/repo$ cat README.md 
+# Bandit Notes
+Some notes for level29 of bandit.
+
+## credentials
+
+- username: bandit29
+- password: bbc96594b4e001778eee9975372716b2
+
+========================================================================================================================
+Flag_Bandit_28=[bbc96594b4e001778eee9975372716b2]
+========================================================================================================================
+
+========================================================================================================================
+bandit29
+========================================================================================================================
+GOAL
+------------------------------------------------------------------------------------------------------------------------
+There is a git repository at ssh://bandit29-git@localhost/home/bandit29-
+git/repo. The password for the user bandit29-git is the same as for the user 
+bandit29.
+
+Clone the repository and find the password for the next level.
+========================================================================================================================
+pix@parrot:~$ ssh bandit29@bandit.labs.overthewire.org -p 2220
+bandit29@bandit:~$ cd /tmp/Pixailz
+bandit29@bandit:/tmp/Pixailz$ git clone ssh://bandit29-git@localhost/home/bandit29-git/repo
+Cloning into 'repo'...
+Could not create directory '/home/bandit29/.ssh'.
+The authenticity of host 'localhost (127.0.0.1)' can't be established.
+ECDSA key fingerprint is SHA256:98UL0ZWr85496EtCRkKlo20X3OPnyPSB5tB5RPbhczc.
+Are you sure you want to continue connecting (yes/no)? yes
+Failed to add the host to the list of known hosts (/home/bandit29/.ssh/known_hosts).
+This is a OverTheWire game server. More information on http://www.overthewire.org/wargames
+
+bandit29-git@localhost's password: 
+remote: Counting objects: 16, done.
+remote: Compressing objects: 100% (11/11), done.
+remote: Total 16 (delta 2), reused 0 (delta 0)
+Receiving objects: 100% (16/16), done.
+Resolving deltas: 100% (2/2), done.
+bandit29@bandit:/tmp/Pixailz$ cd repo
+bandit29@bandit:/tmp/Pixailz/repo$ git branch -r 
+  origin/HEAD -> origin/master
+  origin/dev
+  origin/master
+  origin/sploits-dev
+bandit29@bandit:/tmp/Pixailz/repo$ git checkout dev
+Previous HEAD position was 84abedc... fix username
+Branch dev set up to track remote branch dev from origin.
+Switched to a new branch 'dev'
+bandit29@bandit:/tmp/Pixailz/repo$ git branch
+* dev
+  master
+bandit29@bandit:/tmp/Pixailz/repo$ git log
+commit 33ce2e95d9c5d6fb0a40e5ee9a2926903646b4e3
+Author: Morla Porla <morla@overthewire.org>
+Date:   Tue Oct 16 14:00:41 2018 +0200
+
+    add data needed for development
+
+commit a8af722fccd4206fc3780bd3ede35b2c03886d9b
+Author: Ben Dover <noone@overthewire.org>
+Date:   Tue Oct 16 14:00:41 2018 +0200
+
+    add gif2ascii
+
+commit 84abedc104bbc0c65cb9eb74eb1d3057753e70f8
+Author: Ben Dover <noone@overthewire.org>
+Date:   Tue Oct 16 14:00:41 2018 +0200
+
+    fix username
+
+commit 9b19e7d8c1aadf4edcc5b15ba8107329ad6c5650
+Author: Ben Dover <noone@overthewire.org>
+Date:   Tue Oct 16 14:00:41 2018 +0200
+
+    initial commit of README.md
+bandit29@bandit:/tmp/Pixailz/repo$ git log -p -1
+commit 33ce2e95d9c5d6fb0a40e5ee9a2926903646b4e3
+Author: Morla Porla <morla@overthewire.org>
+Date:   Tue Oct 16 14:00:41 2018 +0200
+
+    add data needed for development
+
+diff --git a/README.md b/README.md
+index 1af21d3..39b87a8 100644
+--- a/README.md
++++ b/README.md
+@@ -4,5 +4,5 @@ Some notes for bandit30 of bandit.
+ ## credentials
+ 
+ - username: bandit30
+-- password: <no passwords in production!>
++- password: 5b90576bedb2cc04c86a9e924ce42faf
+
+
+========================================================================================================================
+Flag_Bandit_29=[5b90576bedb2cc04c86a9e924ce42faf]
+========================================================================================================================
+
+========================================================================================================================
+bandit30
+========================================================================================================================
+GOAL
+------------------------------------------------------------------------------------------------------------------------
+There is a git repository at ssh://bandit30-git@localhost/home/bandit30-
+git/repo. The password for the user bandit30-git is the same as for the user 
+bandit30.
+
+Clone the repository and find the password for the next level.
+========================================================================================================================
+pix@parrot:~$ ssh bandit30@bandit.labs.overthewire.org -p 2220
+bandit30@bandit:~$ cd /tmp/Pixailz
+andit30@bandit:/tmp/Pixailz$ git clone ssh://bandit30-git@localhost/home/bandit30-git/repo
+Cloning into 'repo'...
+Could not create directory '/home/bandit30/.ssh'.
+The authenticity of host 'localhost (127.0.0.1)' can't be established.
+ECDSA key fingerprint is SHA256:98UL0ZWr85496EtCRkKlo20X3OPnyPSB5tB5RPbhczc.
+Are you sure you want to continue connecting (yes/no)? yes
+Failed to add the host to the list of known hosts (/home/bandit30/.ssh/known_hosts).
+This is a OverTheWire game server. More information on http://www.overthewire.org/wargames
+
+bandit30-git@localhost's password: 
+remote: Counting objects: 4, done.
+remote: Total 4 (delta 0), reused 0 (delta 0)
+Receiving objects: 100% (4/4), done.
+bandit30@bandit:/tmp/Pixailz$ cd repo 
+bandit30@bandit:/tmp/Pixailz/repo$ ls 
+README.md
+bandit30@bandit:/tmp/Pixailz/repo$ cat README.md 
+just an epmty file... muahaha
+bandit30@bandit:/tmp/Pixailz/repo/$ git tag
+secret
+bandit30@bandit:/tmp/Pixailz/repo/$ git show secret
+47e603bb428404d265f59c42920d81e5
+
+========================================================================================================================
+Flag_Bandit_30=[47e603bb428404d265f59c42920d81e5]
+========================================================================================================================
+
+========================================================================================================================
+bandit31
+========================================================================================================================
+GOAL
+------------------------------------------------------------------------------------------------------------------------
+There is a git repository at ssh://bandit31-git@localhost/home/bandit31-
+git/repo. The password for the user bandit31-git is the same as for the user 
+bandit31.
+
+Clone the repository and find the password for the next level.
+========================================================================================================================
+pix@parrot:~$ ssh bandit31@bandit.labs.overthewire.org -p 2220
+bandit31@bandit:~$ cd /tmp/Pixailz
+bandit31@bandit:/tmp/Pixailz$ git clone ssh://bandit31-git@localhost/home/bandit31-git/repo
+Cloning into 'repo'...
+Could not create directory '/home/bandit31/.ssh'.
+The authenticity of host 'localhost (127.0.0.1)' can't be established.
+ECDSA key fingerprint is SHA256:98UL0ZWr85496EtCRkKlo20X3OPnyPSB5tB5RPbhczc.
+Are you sure you want to continue connecting (yes/no)? yes
+Failed to add the host to the list of known hosts (/home/bandit31/.ssh/known_hosts).
+This is a OverTheWire game server. More information on http://www.overthewire.org/wargames
+
+bandit31-git@localhost's password: 
+remote: Counting objects: 4, done.
+remote: Compressing objects: 100% (3/3), done.
+remote: Total 4 (delta 0), reused 0 (delta 0)
+Receiving objects: 100% (4/4), done.
+bandit31@bandit:/tmp/Pixailz$ cd repo
+bandit31@bandit:/tmp/Pixailz/repo$ cat README.md 
+This time your task is to push a file to the remote repository.
+
+Details:
+    File name: key.txt
+    Content: 'May I come in?'
+    Branch: master
+bandit31@bandit:/tmp/Pixailz/repo$ touch key.txt
+bandit31@bandit:/tmp/Pixailz/repo$ echo "May I come in?" > key.txt
+bandit31@bandit:/tmp/Pixailz/repo$ git add key.txt 
+The following paths are ignored by one of your .gitignore files:
+key.txt
+Use -f if you really want to add them.
+bandit31@bandit:/tmp/Pixailz/repo$ ls -la 
+total 24
+drwxr-xr-x 3 bandit31 bandit31 4096 Jan  2 11:34 .
+drwxrwxrwx 3 bandit24 root     4096 Jan  2 11:30 ..
+drwxr-xr-x 8 bandit31 bandit31 4096 Jan  2 11:34 .git
+-rw-r--r-- 1 bandit31 bandit31    6 Jan  2 11:30 .gitignore
+-rw-r--r-- 1 bandit31 bandit31   15 Jan  2 11:34 key.txt
+-rw-r--r-- 1 bandit31 bandit31  147 Jan  2 11:30 README.md
+bandit31@bandit:/tmp/Pixailz/repo$ rm .gitignore 
+bandit31@bandit:/tmp/Pixailz/repo$ git add key.txt 
+bandit31@bandit:/tmp/Pixailz/repo$ git commit -m "upload a file"
+[master 79c42de] upload a file
+ 1 file changed, 1 insertion(+)
+ create mode 100644 key.txt
+bandit31@bandit:/tmp/Pixailz/repo$ git push origin master
+Could not create directory '/home/bandit31/.ssh'.
+The authenticity of host 'localhost (127.0.0.1)' can't be established.
+ECDSA key fingerprint is SHA256:98UL0ZWr85496EtCRkKlo20X3OPnyPSB5tB5RPbhczc.
+Are you sure you want to continue connecting (yes/no)? yes 
+Failed to add the host to the list of known hosts (/home/bandit31/.ssh/known_hosts).
+This is a OverTheWire game server. More information on http://www.overthewire.org/wargames
+
+bandit31-git@localhost's password: 
+Counting objects: 3, done.
+Delta compression using up to 4 threads.
+Compressing objects: 100% (2/2), done.
+Writing objects: 100% (3/3), 322 bytes | 0 bytes/s, done.
+Total 3 (delta 0), reused 0 (delta 0)
+remote: ### Attempting to validate files... ####
+remote: 
+remote: .oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.
+remote: 
+remote: Well done! Here is the password for the next level:
+remote: 56a9bf19c63d650ce78e6ec0354ee45e
+remote: 
+remote: .oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.
+remote: 
+To ssh://localhost/home/bandit31-git/repo
+ ! [remote rejected] master -> master (pre-receive hook declined)
+error: failed to push some refs to 'ssh://bandit31-git@localhost/home/bandit31-git/repo'
+
+========================================================================================================================
+Flag_Bandit_31=[56a9bf19c63d650ce78e6ec0354ee45e]
+========================================================================================================================
+
+========================================================================================================================
+bandit32
+========================================================================================================================
+GOAL
+------------------------------------------------------------------------------------------------------------------------
+After all this git stuff its time for another escape. Good luck!
+========================================================================================================================
+pix@parrot:~$ ssh bandit32@bandit.labs.overthewire.org -p 2220
+This is a OverTheWire game server. More information on http://www.overthewire.org/wargames
+
+bandit32@bandit.labs.overthewire.org's password: 
+Linux bandit 4.18.12 x86_64 GNU/Linux
+               
+      ,----..            ,----,          .---. 
+     /   /   \         ,/   .`|         /. ./|
+    /   .     :      ,`   .'  :     .--'.  ' ;
+   .   /   ;.  \   ;    ;     /    /__./ \ : |
+  .   ;   /  ` ; .'___,/    ,' .--'.  '   \' .
+  ;   |  ; \ ; | |    :     | /___/ \ |    ' ' 
+  |   :  | ; | ' ;    |.';  ; ;   \  \;      : 
+  .   |  ' ' ' : `----'  |  |  \   ;  `      |
+  '   ;  \; /  |     '   :  ;   .   \    .\  ; 
+   \   \  ',  /      |   |  '    \   \   ' \ |
+    ;   :    /       '   :  |     :   '  |--"  
+     \   \ .'        ;   |.'       \   \ ;     
+  www. `---` ver     '---' he       '---" ire.org     
+               
+              
+Welcome to OverTheWire!
+
+If you find any problems, please report them to Steven or morla on
+irc.overthewire.org.
+
+--[ Playing the games ]--
+
+  This machine might hold several wargames. 
+  If you are playing "somegame", then:
+
+    * USERNAMES are somegame0, somegame1, ...
+    * Most LEVELS are stored in /somegame/.
+    * PASSWORDS for each level are stored in /etc/somegame_pass/.
+
+  Write-access to homedirectories is disabled. It is advised to create a
+  working directory with a hard-to-guess name in /tmp/.  You can use the
+  command "mktemp -d" in order to generate a random and hard to guess
+  directory in /tmp/.  Read-access to both /tmp/ and /proc/ is disabled
+  so that users can not snoop on eachother. Files and directories with 
+  easily guessable or short names will be periodically deleted!
+	
+  Please play nice:
+      
+    * don't leave orphan processes running
+    * don't leave exploit-files laying around
+    * don't annoy other players
+    * don't post passwords or spoilers
+    * again, DONT POST SPOILERS! 
+      This includes writeups of your solution on your blog or website!
+
+--[ Tips ]--
+
+  This machine has a 64bit processor and many security-features enabled
+  by default, although ASLR has been switched off.  The following
+  compiler flags might be interesting:
+
+    -m32                    compile for 32bit
+    -fno-stack-protector    disable ProPolice
+    -Wl,-z,norelro          disable relro 
+
+  In addition, the execstack tool can be used to flag the stack as
+  executable on ELF binaries.
+
+  Finally, network-access is limited for most levels by a local
+  firewall.
+
+--[ Tools ]--
+
+ For your convenience we have installed a few usefull tools which you can find
+ in the following locations:
+
+    * pwndbg (https://github.com/pwndbg/pwndbg) in /usr/local/pwndbg/
+    * peda (https://github.com/longld/peda.git) in /usr/local/peda/
+    * gdbinit (https://github.com/gdbinit/Gdbinit) in /usr/local/gdbinit/
+    * pwntools (https://github.com/Gallopsled/pwntools)
+    * radare2 (http://www.radare.org/)
+    * checksec.sh (http://www.trapkit.de/tools/checksec.html) in /usr/local/bin/checksec.sh
+
+--[ More information ]--
+
+  For more information regarding individual wargames, visit
+  http://www.overthewire.org/wargames/
+
+  For support, questions or comments, contact us through IRC on
+  irc.overthewire.org #wargames.
+
+  Enjoy your stay!
+
+WELCOME TO THE UPPERCASE SHELL
+>> $0
+$ pwd
+/home/bandit32
+$ export SHELL=/bin/bash
+$ echo $SHELL
+/bin/bash
+$ $SHELL
+bandit33@bandit:~$ pwd
+/home/bandit32
+bandit33@bandit:~$ cat /etc/bandit_pass/bandit33
+c9c3199ddf4121b10cf581a98d51caee
+
+========================================================================================================================
+Flag_Bandit_32=[c9c3199ddf4121b10cf581a98d51caee]
+========================================================================================================================
+
+#Writup By Pixailz

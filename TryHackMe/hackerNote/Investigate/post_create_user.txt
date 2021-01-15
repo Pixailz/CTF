@@ -1,0 +1,22 @@
+##################
+# REQUEST
+
+POST /api/user/create HTTP/1.1
+Host: 10.10.131.178
+Content-Length: 59
+Cache-Control: max-age=0
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.66 Safari/537.36
+Content-Type: application/json
+Accept: */*
+Origin: http://10.10.131.178
+Accept-Encoding: gzip, deflate
+Accept-Language: en-US,en;q=0.9
+Connection: close
+
+{
+	"Username":"Pix ",
+	"Password":"1234",
+	"PasswordHint":"help"
+}
+
+##################

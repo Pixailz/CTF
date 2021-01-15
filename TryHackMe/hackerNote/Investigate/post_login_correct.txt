@@ -1,0 +1,36 @@
+##################
+# REQUEST
+
+POST /api/user/login HTTP/1.1
+Host: 10.10.131.178
+Content-Length: 36
+Cache-Control: max-age=0
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.66 Safari/537.36
+Content-Type: application/json
+Accept: */*
+Origin: http://10.10.131.178
+Accept-Encoding: gzip, deflate
+Accept-Language: en-US,en;q=0.9
+Connection: close
+
+{
+	"username":"Pix",
+	"password":"1234"
+}
+
+##################
+
+
+##################
+# RESPONSE
+
+HTTP/1.1 200 OK
+Content-Type: application/json
+Set-Cookie: SessionToken=16fd01d6a457304d5f1ec1aa45813165; Path=/
+Date: Fri, 04 Dec 2020 03:22:37 GMT
+Content-Length: 71
+Connection: close
+
+{"SessionToken":"16fd01d6a457304d5f1ec1aa45813165","status":"success"}
+
+##################

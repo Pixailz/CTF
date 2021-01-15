@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nmaprun>
+<?xml-stylesheet href="file:///usr/bin/../share/nmap/nmap.xsl" type="text/xsl"?>
+<!-- Nmap 7.91 scan initiated Tue Nov 17 04:43:33 2020 as: nmap -p- -A -T4 -oN nmap.txt -oX nmap.xml 10.10.94.113 -->
+<nmaprun scanner="nmap" args="nmap -p- -A -T4 -oN nmap.txt -oX nmap.xml 10.10.94.113" start="1605584613" startstr="Tue Nov 17 04:43:33 2020" version="7.91" xmloutputversion="1.05">
+<scaninfo type="syn" protocol="tcp" numservices="65535" services="1-65535"/>
+<verbose level="0"/>
+<debugging level="0"/>
+<hosthint><status state="up" reason="unknown-response" reason_ttl="0"/>
+<address addr="10.10.94.113" addrtype="ipv4"/>
+<hostnames>
+</hostnames>
+</hosthint>
+<taskprogress task="SYN Stealth Scan" time="1605584673" percent="43.37" remaining="76" etc="1605584749"/>
+<host starttime="1605584614" endtime="1605584756"><status state="up" reason="echo-reply" reason_ttl="63"/>
+<address addr="10.10.94.113" addrtype="ipv4"/>
+<hostnames>
+</hostnames>
+<ports><extraports state="filtered" count="65532">
+<extrareasons reason="no-responses" count="65532"/>
+</extraports>
+<port protocol="tcp" portid="22"><state state="closed" reason="reset" reason_ttl="63"/><service name="ssh" method="table" conf="3"/></port>
+<port protocol="tcp" portid="80"><state state="open" reason="syn-ack" reason_ttl="63"/><service name="http" product="Apache httpd" method="probed" conf="10"><cpe>cpe:/a:apache:http_server</cpe></service><script id="http-server-header" output="Apache"><elem>Apache</elem>
+</script><script id="http-title" output="Site doesn&apos;t have a title (text/html)."></script></port>
+<port protocol="tcp" portid="443"><state state="open" reason="syn-ack" reason_ttl="63"/><service name="http" product="Apache httpd" tunnel="ssl" method="probed" conf="10"><cpe>cpe:/a:apache:http_server</cpe></service><script id="http-server-header" output="Apache"><elem>Apache</elem>
+</script><script id="http-title" output="Site doesn&apos;t have a title (text/html)."></script><script id="ssl-cert" output="Subject: commonName=www.example.com&#xa;Not valid before: 2015-09-16T10:45:03&#xa;Not valid after:  2025-09-13T10:45:03"><table key="subject">
+<elem key="commonName">www.example.com</elem>
+</table>
+<table key="issuer">
+<elem key="commonName">www.example.com</elem>
+</table>
+<table key="pubkey">
+<elem key="type">rsa</elem>
+<elem key="bits">1024</elem>
+<elem key="modulus">D9711BFDFC7BC0F2FE6C7067305BA1817AE2DBB59FC736CEC58EC3C1455346B3405C6FED13CA706C2DB002E474032435C592EC9F77D3119A99D0993DDA116388617DEB0B22C859C69CA4E8DA180649ADC7E19FC2BACB87A994CAFB329E8DBD18096A6167DF7F35D1A226DD0ED1939FD35E32A5E86D54D3293691D011ACA4E4B9</elem>
+<elem key="exponent">65537</elem>
+</table>
+<elem key="sig_algo">sha1WithRSAEncryption</elem>
+<table key="validity">
+<elem key="notBefore">2015-09-16T10:45:03</elem>
+<elem key="notAfter">2025-09-13T10:45:03</elem>
+</table>
+<elem key="md5">3c163b1987c342ad6634c1c9d0aafb97</elem>
+<elem key="sha1">ef0c5fa5931a09a5687ca2c280c4c79207cef71b</elem>
+<elem key="pem">-&#45;&#45;&#45;&#45;BEGIN CERTIFICATE-&#45;&#45;&#45;&#45;&#xa;MIIBqzCCARQCCQCgSfELirADCzANBgkqhkiG9w0BAQUFADAaMRgwFgYDVQQDDA93&#xa;d3cuZXhhbXBsZS5jb20wHhcNMTUwOTE2MTA0NTAzWhcNMjUwOTEzMTA0NTAzWjAa&#xa;MRgwFgYDVQQDDA93d3cuZXhhbXBsZS5jb20wgZ8wDQYJKoZIhvcNAQEBBQADgY0A&#xa;MIGJAoGBANlxG/38e8Dy/mxwZzBboYF64tu1n8c2zsWOw8FFU0azQFxv7RPKcGwt&#xa;sALkdAMkNcWS7J930xGamdCZPdoRY4hhfesLIshZxpyk6NoYBkmtx+GfwrrLh6mU&#xa;yvsyno29GAlqYWfffzXRoibdDtGTn9NeMqXobVTTKTaR0BGspOS5AgMBAAEwDQYJ&#xa;KoZIhvcNAQEFBQADgYEASfG0dH3x4/XaN6IWwaKo8XeRStjYTy/uBJEBUERlP17X&#xa;1TooZOYbvgFAqK8DPOl7EkzASVeu0mS5orfptWjOZ/UWVZujSNj7uu7QR4vbNERx&#xa;ncZrydr7FklpkIN5Bj8SYc94JI9GsrHip4mpbystXkxncoOVESjRBES/iatbkl0=&#xa;-&#45;&#45;&#45;&#45;END CERTIFICATE-&#45;&#45;&#45;&#45;&#xa;</elem>
+</script></port>
+</ports>
+<os><portused state="open" proto="tcp" portid="80"/>
+<portused state="closed" proto="tcp" portid="22"/>
+<osmatch name="Linux 3.10 - 3.13" accuracy="90" line="63361">
+<osclass type="general purpose" vendor="Linux" osfamily="Linux" osgen="3.X" accuracy="90"><cpe>cpe:/o:linux:linux_kernel:3</cpe></osclass>
+</osmatch>
+<osmatch name="Linux 3.10 - 4.11" accuracy="90" line="63442">
+<osclass type="general purpose" vendor="Linux" osfamily="Linux" osgen="3.X" accuracy="90"><cpe>cpe:/o:linux:linux_kernel:3</cpe></osclass>
+<osclass type="general purpose" vendor="Linux" osfamily="Linux" osgen="4.X" accuracy="90"><cpe>cpe:/o:linux:linux_kernel:4</cpe></osclass>
+</osmatch>
+<osmatch name="Linux 3.13" accuracy="90" line="63910">
+<osclass type="general purpose" vendor="Linux" osfamily="Linux" osgen="3.X" accuracy="90"><cpe>cpe:/o:linux:linux_kernel:3.13</cpe></osclass>
+</osmatch>
+<osmatch name="Linux 3.13 or 4.2" accuracy="90" line="64010">
+<osclass type="general purpose" vendor="Linux" osfamily="Linux" osgen="3.X" accuracy="90"><cpe>cpe:/o:linux:linux_kernel:3.13</cpe></osclass>
+<osclass type="general purpose" vendor="Linux" osfamily="Linux" osgen="4.X" accuracy="90"><cpe>cpe:/o:linux:linux_kernel:4.2</cpe></osclass>
+</osmatch>
+<osmatch name="Linux 3.2 - 3.5" accuracy="90" line="65197">
+<osclass type="general purpose" vendor="Linux" osfamily="Linux" osgen="3.X" accuracy="90"><cpe>cpe:/o:linux:linux_kernel:3</cpe></osclass>
+</osmatch>
+<osmatch name="Linux 3.2 - 3.8" accuracy="90" line="65270">
+<osclass type="general purpose" vendor="Linux" osfamily="Linux" osgen="3.X" accuracy="90"><cpe>cpe:/o:linux:linux_kernel:3</cpe></osclass>
+</osmatch>
+<osmatch name="Linux 5.4" accuracy="90" line="68161">
+<osclass type="general purpose" vendor="Linux" osfamily="Linux" osgen="5.X" accuracy="90"><cpe>cpe:/o:linux:linux_kernel:5.4</cpe></osclass>
+</osmatch>
+<osmatch name="Crestron XPanel control system" accuracy="89" line="19546">
+<osclass type="specialized" vendor="Crestron" osfamily="2-Series" accuracy="89"><cpe>cpe:/o:crestron:2_series</cpe></osclass>
+</osmatch>
+<osmatch name="Linux 3.12" accuracy="89" line="63668">
+<osclass type="general purpose" vendor="Linux" osfamily="Linux" osgen="3.X" accuracy="89"><cpe>cpe:/o:linux:linux_kernel:3.12</cpe></osclass>
+</osmatch>
+<osmatch name="Linux 3.16" accuracy="89" line="64210">
+<osclass type="general purpose" vendor="Linux" osfamily="Linux" osgen="3.X" accuracy="89"><cpe>cpe:/o:linux:linux_kernel:3.16</cpe></osclass>
+</osmatch>
+</os>
+<uptime seconds="17248840" lastboot="Fri May  1 14:25:16 2020"/>
+<distance value="2"/>
+<tcpsequence index="261" difficulty="Good luck!" values="CC5924C7,E2BB111C,475570B0,3FDC54D5,120424DE,124E4280"/>
+<ipidsequence class="All zeros" values="0,0,0,0,0,0"/>
+<tcptssequence class="other" values="FFFFD352,FFFFD36C,FFFFD386,FFFFD3A0,FFFFD3B9,FFFFD3D2"/>
+<trace port="22" proto="tcp">
+<hop ttl="1" ipaddr="10.8.0.1" rtt="54.37"/>
+<hop ttl="2" ipaddr="10.10.94.113" rtt="54.50"/>
+</trace>
+<times srtt="48275" rttvar="8967" to="100000"/>
+</host>
+<runstats><finished time="1605584756" timestr="Tue Nov 17 04:45:56 2020" summary="Nmap done at Tue Nov 17 04:45:56 2020; 1 IP address (1 host up) scanned in 143.07 seconds" elapsed="143.07" exit="success"/><hosts up="1" down="0" total="1"/>
+</runstats>
+</nmaprun>

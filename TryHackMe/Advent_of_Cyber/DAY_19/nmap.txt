@@ -1,0 +1,33 @@
+# Nmap 7.91 scan initiated Sun Dec  6 18:18:54 2020 as: nmap -T4 -A -oN nmap.txt -oX nmap.xml 10.10.58.139
+Nmap scan report for 10.10.58.139
+Host is up (0.077s latency).
+Not shown: 999 closed ports
+PORT     STATE SERVICE VERSION
+4567/tcp open  ssh     OpenSSH 7.2p2 Ubuntu 4ubuntu2.8 (Ubuntu Linux; protocol 2.0)
+| ssh-hostkey: 
+|   2048 0e:69:53:ff:76:81:3a:10:c5:33:76:d3:3b:e0:be:b9 (RSA)
+|   256 40:48:0c:6a:75:80:f2:92:3e:e4:6a:6f:d1:bd:3a:fc (ECDSA)
+|_  256 81:46:5a:8e:c3:ab:4f:1a:bb:da:f4:6d:98:ed:94:0a (ED25519)
+No exact OS matches for host (If you know what OS is running on it, see https://nmap.org/submit/ ).
+TCP/IP fingerprint:
+OS:SCAN(V=7.91%E=4%D=12/6%OT=4567%CT=1%CU=42977%PV=Y%DS=2%DC=T%G=Y%TM=5FCD1
+OS:293%P=x86_64-pc-linux-gnu)SEQ(SP=103%GCD=1%ISR=10A%TI=Z%II=I%TS=8)SEQ(SP
+OS:=103%GCD=1%ISR=10A%TI=Z%CI=I%II=I%TS=8)OPS(O1=M505ST11NW6%O2=M505ST11NW6
+OS:%O3=M505NNT11NW6%O4=M505ST11NW6%O5=M505ST11NW6%O6=M505ST11)WIN(W1=68DF%W
+OS:2=68DF%W3=68DF%W4=68DF%W5=68DF%W6=68DF)ECN(R=Y%DF=Y%T=40%W=6903%O=M505NN
+OS:SNW6%CC=Y%Q=)T1(R=Y%DF=Y%T=40%S=O%A=S+%F=AS%RD=0%Q=)T2(R=N)T3(R=N)T4(R=Y
+OS:%DF=Y%T=40%W=0%S=A%A=Z%F=R%O=%RD=0%Q=)T5(R=Y%DF=Y%T=40%W=0%S=Z%A=S+%F=AR
+OS:%O=%RD=0%Q=)T6(R=Y%DF=Y%T=40%W=0%S=A%A=Z%F=R%O=%RD=0%Q=)T7(R=Y%DF=Y%T=40
+OS:%W=0%S=Z%A=S+%F=AR%O=%RD=0%Q=)U1(R=Y%DF=N%T=40%IPL=164%UN=0%RIPL=G%RID=G
+OS:%RIPCK=G%RUCK=G%RUD=G)IE(R=Y%DFI=N%T=40%CD=S)
+
+Network Distance: 2 hops
+Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+
+TRACEROUTE (using port 110/tcp)
+HOP RTT      ADDRESS
+1   31.86 ms 10.8.0.1
+2   62.43 ms 10.10.58.139
+
+OS and Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+# Nmap done at Sun Dec  6 18:19:15 2020 -- 1 IP address (1 host up) scanned in 21.23 seconds
